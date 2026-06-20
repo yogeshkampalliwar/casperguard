@@ -1,0 +1,7 @@
+
+# Wallet / keys - NEVER commit
+*.pem
+*secret_key*
+*public_key*
+.env
+*.env
