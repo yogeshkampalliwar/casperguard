@@ -15,8 +15,9 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Install casper-client and cargo-odra
+      - name: Install wasm target, casper-client and cargo-odra
         run: |
+          rustup target add wasm32-unknown-unknown
           cargo install casper-client
           cargo install cargo-odra
 
@@ -27,13 +28,16 @@ jobs:
           echo "Using toolchain: $TOOLCHAIN"
           rustup toolchain install "$TOOLCHAIN"
           rustup target add wasm32-unknown-unknown --toolchain "$TOOLCHAIN"
-          rustup target add wasm32-unknown-unknown
+
+      - name: Install wasm-opt (binaryen) - latest release
+        run: |
+          curl -L https://github.com/WebAssembly/binaryen/releases/download/version_119/binaryen-version_119-x86_64-linux.tar.gz -o binaryen.tar.gz
+          tar -xzf binaryen.tar.gz
+          sudo cp binaryen-version_119/bin/wasm-opt /usr/local/bin/
+          wasm-opt --version
 
       - name: Write secret key
         run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
-
-      - name: Install wasm-opt (binaryen)
-        run: sudo apt-get update && sudo apt-get install -y binaryen
 
       - name: Build contract
         run: |
