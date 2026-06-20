@@ -15,8 +15,9 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Install casper-client and cargo-odra
+      - name: Install wasm target, casper-client and cargo-odra
         run: |
+          rustup target add wasm32-unknown-unknown
           cargo install casper-client
           cargo install cargo-odra
 
