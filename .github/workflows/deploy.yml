@@ -32,6 +32,9 @@ jobs:
       - name: Write secret key
         run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
 
+      - name: Install wasm-opt (binaryen)
+        run: sudo apt-get update && sudo apt-get install -y binaryen
+
       - name: Build contract
         run: |
           cd contract
