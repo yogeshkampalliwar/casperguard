@@ -1,0 +1,40 @@
+name: Deploy to Casper Testnet
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install casper-client
+        run: cargo install casper-client
+
+      - name: Write secret key
+        run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
+
+      - name: Build contract
+        run: |
+          cd contract
+          cargo odra build
+
+      - name: Deploy to testnet
+        run: |
+          casper-client put-deploy \
+            --node-address https://node.testnet.casper.network/rpc \
+            --chain-name casper-test \
+            --secret-key secret_key.pem \
+            --payment-amount 100000000000 \
+            --session-path contract/wasm/CasperGuard.wasm
+
+      - name: Cleanup
+        if: always()
+        run: rm -f secret_key.pem
