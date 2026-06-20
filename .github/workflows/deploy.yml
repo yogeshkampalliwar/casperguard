@@ -15,8 +15,10 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Install casper-client
-        run: cargo install casper-client
+      - name: Install casper-client and cargo-odra
+        run: |
+          cargo install casper-client
+          cargo install cargo-odra
 
       - name: Write secret key
         run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
