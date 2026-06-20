@@ -15,11 +15,19 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Install wasm target, casper-client and cargo-odra
+      - name: Install casper-client and cargo-odra
         run: |
-          rustup target add wasm32-unknown-unknown
           cargo install casper-client
           cargo install cargo-odra
+
+      - name: Install wasm32 target for pinned nightly toolchain
+        run: |
+          cd contract
+          TOOLCHAIN=$(cat rust-toolchain 2>/dev/null | tr -d ' \n' || echo nightly)
+          echo "Using toolchain: $TOOLCHAIN"
+          rustup toolchain install "$TOOLCHAIN"
+          rustup target add wasm32-unknown-unknown --toolchain "$TOOLCHAIN"
+          rustup target add wasm32-unknown-unknown
 
       - name: Write secret key
         run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
