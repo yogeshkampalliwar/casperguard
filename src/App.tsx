@@ -2,7 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 const CONTRACT_HASH = 'hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0'
-const RPC_URL = 'https://node.testnet.casper.network/rpc'
+const RPC_URLS = [
+  'https://node.testnet.casper.network/rpc',
+  'https://rpc.testnet.casperlabs.io/rpc',
+  'http://18.185.57.86:7777/rpc'
+]
+const RPC_URL = RPC_URLS[0]
 const EXPLORER = 'https://testnet.cspr.live'
 
 interface Transaction {
@@ -92,8 +97,14 @@ export default function App() {
 
   const fetchBlockHeight = async () => {
     try {
-      const res = await axios.post(RPC_URL, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 })
-      setBlockHeight(res.data.result.block.header.height)
+      let blockFetched = false
+      for (const rpc of RPC_URLS) {
+        try {
+          const res = await axios.post(rpc, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 }, { timeout: 5000 })
+          const h = res?.data?.result?.block?.header?.height || res?.data?.result?.block_with_signatures?.block?.header?.height
+          if (h) { setBlockHeight(h); blockFetched = true; break }
+        } catch (e) {}
+      }
     } catch { }
   }
 
