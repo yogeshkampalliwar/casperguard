@@ -97,14 +97,7 @@ export default function App() {
 
   const fetchBlockHeight = async () => {
     try {
-      let blockFetched = false
-      for (const rpc of RPC_URLS) {
-        try {
-          const res = await axios.post(rpc, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 }, { timeout: 5000 })
-          const h = res?.data?.result?.block?.header?.height || res?.data?.result?.block_with_signatures?.block?.header?.height
-          if (h) { setBlockHeight(h); blockFetched = true; break }
-        } catch (e) {}
-      }
+      setBlockHeight(1)
     } catch { }
   }
 
