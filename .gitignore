@@ -5,3 +5,5 @@
 *public_key*
 .env
 *.env
+.vercel
+.env*
