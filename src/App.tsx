@@ -98,7 +98,7 @@ export default function App() {
     try {
       for (const rpc of RPC_URLS) {
         try {
-          const res = await axios.post(rpc, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 }, { timeout: 5000 })
+          const res = await axios.post(rpc, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 }, { timeout: 5000, headers: { 'x-api-key': 't-YOUR-TATUM-KEY-HERE' } })
           const h = res?.data?.result?.block_with_signatures?.block?.Version2?.header?.height || res?.data?.result?.block?.header?.height
           if (h) { setBlockHeight(h); break }
         } catch (e) {}
