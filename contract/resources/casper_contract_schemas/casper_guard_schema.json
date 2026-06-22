@@ -1,0 +1,385 @@
+{
+  "casper_contract_schema_version": 1,
+  "toolchain": "rustc 1.94.0-nightly (8d670b93d 2025-12-31)",
+  "authors": [],
+  "repository": null,
+  "homepage": null,
+  "contract_name": "CasperGuard",
+  "contract_version": "1.0.0",
+  "types": [
+    {
+      "struct": {
+        "name": "AgentRegistered",
+        "description": null,
+        "members": [
+          {
+            "name": "agent_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "owner",
+            "description": null,
+            "ty": "Key"
+          },
+          {
+            "name": "daily_budget_cspr",
+            "description": null,
+            "ty": "U64"
+          },
+          {
+            "name": "max_per_call_cspr",
+            "description": null,
+            "ty": "U64"
+          },
+          {
+            "name": "timestamp",
+            "description": null,
+            "ty": "U64"
+          }
+        ]
+      }
+    },
+    {
+      "struct": {
+        "name": "SettlementRecorded",
+        "description": null,
+        "members": [
+          {
+            "name": "agent_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "consumer",
+            "description": null,
+            "ty": "Key"
+          },
+          {
+            "name": "amount",
+            "description": null,
+            "ty": "U512"
+          },
+          {
+            "name": "service_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "proof_hash",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "timestamp",
+            "description": null,
+            "ty": "U64"
+          }
+        ]
+      }
+    },
+    {
+      "struct": {
+        "name": "TransactionApproved",
+        "description": null,
+        "members": [
+          {
+            "name": "agent_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "amount",
+            "description": null,
+            "ty": "U512"
+          },
+          {
+            "name": "service_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "proof_hash",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "timestamp",
+            "description": null,
+            "ty": "U64"
+          }
+        ]
+      }
+    },
+    {
+      "struct": {
+        "name": "TransactionBlocked",
+        "description": null,
+        "members": [
+          {
+            "name": "agent_id",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "amount",
+            "description": null,
+            "ty": "U512"
+          },
+          {
+            "name": "reason",
+            "description": null,
+            "ty": "String"
+          },
+          {
+            "name": "timestamp",
+            "description": null,
+            "ty": "U64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "name": "AgentAlreadyExists",
+      "description": "",
+      "discriminant": 6
+    },
+    {
+      "name": "AgentNotFound",
+      "description": "",
+      "discriminant": 5
+    },
+    {
+      "name": "DuplicateTransaction",
+      "description": "",
+      "discriminant": 2
+    },
+    {
+      "name": "ExceedsDailyBudget",
+      "description": "",
+      "discriminant": 4
+    },
+    {
+      "name": "ExceedsMaxPerCall",
+      "description": "",
+      "discriminant": 3
+    },
+    {
+      "name": "Unauthorized",
+      "description": "",
+      "discriminant": 1
+    }
+  ],
+  "entry_points": [
+    {
+      "name": "register_agent",
+      "description": "",
+      "is_mutable": true,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        },
+        {
+          "name": "daily_budget_cspr",
+          "description": null,
+          "ty": "U64",
+          "optional": false
+        },
+        {
+          "name": "max_per_call_cspr",
+          "description": null,
+          "ty": "U64",
+          "optional": false
+        }
+      ],
+      "return_ty": "Unit",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "secure_transaction",
+      "description": "",
+      "is_mutable": true,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        },
+        {
+          "name": "amount",
+          "description": null,
+          "ty": "U512",
+          "optional": false
+        },
+        {
+          "name": "service_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        },
+        {
+          "name": "proof_hash",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "Unit",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "reset_daily_budget",
+      "description": "",
+      "is_mutable": true,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "Unit",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_agent_reputation",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_agent_spent_today",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_agent_daily_budget",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_total_settlements",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_total_blocked",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    },
+    {
+      "name": "get_agent_blocked_count",
+      "description": "",
+      "is_mutable": false,
+      "arguments": [
+        {
+          "name": "agent_id",
+          "description": null,
+          "ty": "String",
+          "optional": false
+        }
+      ],
+      "return_ty": "U64",
+      "is_contract_context": true,
+      "access": "public"
+    }
+  ],
+  "events": [
+    {
+      "name": "AgentRegistered",
+      "ty": "AgentRegistered"
+    },
+    {
+      "name": "SettlementRecorded",
+      "ty": "SettlementRecorded"
+    },
+    {
+      "name": "TransactionApproved",
+      "ty": "TransactionApproved"
+    },
+    {
+      "name": "TransactionBlocked",
+      "ty": "TransactionBlocked"
+    }
+  ],
+  "call": {
+    "wasm_file_name": "CasperGuard.wasm",
+    "description": "",
+    "arguments": [
+      {
+        "name": "odra_cfg_package_hash_key_name",
+        "description": "The arg name for the package hash key name.",
+        "ty": "String",
+        "optional": false
+      },
+      {
+        "name": "odra_cfg_allow_key_override",
+        "description": "If true and the key specified in odra_cfg_package_hash_key_name already exists, it will be overwritten.",
+        "ty": "Bool",
+        "optional": false
+      },
+      {
+        "name": "odra_cfg_is_upgradable",
+        "description": "The arg name for the contract upgradeability setting.",
+        "ty": "Bool",
+        "optional": false
+      },
+      {
+        "name": "odra_cfg_is_upgrade",
+        "description": "The arg name for telling the installer that the contract is being upgraded.",
+        "ty": "Bool",
+        "optional": false
+      }
+    ]
+  }
+}
