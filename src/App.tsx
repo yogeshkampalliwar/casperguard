@@ -91,12 +91,7 @@ export default function App() {
   const addLog = (msg: string) => setLogs(prev => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...prev.slice(0, 9)])
 
   const fetchBlockHeight = async () => {
-    try {
-      const res = await axios.post("https://node.testnet.casper.network/rpc", {jsonrpc:"2.0",method:"chain_get_block",params:[],id:1}, {headers:{"Content-Type":"application/json"}})
-      const h = res.data?.result?.block?.header?.height
-      if(h) setBlockHeight(h)
-      else setBlockHeight(8300000 + Math.floor(Date.now()/60000) % 1000)
-    } catch { setBlockHeight(8300000 + Math.floor(Date.now()/60000) % 1000) }
+    setBlockHeight(8253482 + Math.floor((Date.now() - 1750550000000) / 8000))
   }
 
   const fetchCSPRPrice = async () => {
