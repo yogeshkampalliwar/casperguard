@@ -107,7 +107,7 @@ export default function App() {
     try {
       const res = await axios.post(RPC_URL, {
         jsonrpc: '2.0', method: 'info_get_deploy',
-        params: { deploy_hash: CONTRACT_HASH.replace('hash-', '') }, id: 1
+        params: { deploy_hash: '3bb468313efb823a81d3350ab8f2024687c1d9218a4a41d86d8f3429e7af5bfb' }, id: 1
       })
       const deploy = res.data.result?.deploy
       const execInfo = res.data.result?.execution_results?.[0]
