@@ -206,7 +206,7 @@ export default function App() {
         {/* Stats Row */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
           {[
-            { label: 'BLOCK', value: 'LIVE', color: '#00ff88' },
+            { label: 'BLOCK', value: blockHeight ? blockHeight.toString() : '...', color: '#00ff88' },
             { label: 'CSPR', value: csprPrice ? `$${csprPrice.toFixed(6)}` : '...', color: '#fff' },
             { label: 'NETWORK', value: 'TESTNET', color: '#ff6666' }
           ].map(s => (
