@@ -159,7 +159,7 @@ export default function App() {
       fontFamily: "'Courier New', monospace",
       position: 'relative',
       width: '100%',
-      minHeight: 'auto',
+      minHeight: '100vh',
       background: '#0B0E11',
       color: '#fff',
       overflowX: 'hidden',
@@ -283,7 +283,7 @@ export default function App() {
           <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
           {logs.map((l, i) => (
             <div key={i} style={{
-              fontSize: 22, lineHeight: 2.2,
+              fontSize: 26, lineHeight: 2.4,
               color: "#00ff41",
               marginBottom: 6,
               borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000',
