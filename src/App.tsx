@@ -286,7 +286,7 @@ export default function App() {
                   TX: {tx.deploy_hash.slice(0, 24)}...
                 </div>
                 <div style={{ fontSize: 12, color: '#555', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
-                <a href={`${EXPLORER}/deploy/${tx.deploy_hash}`} target="_blank" rel="noreferrer"
+                <a href={`${EXPLORER}/transaction/${tx.deploy_hash}`} target="_blank" rel="noreferrer"
                   style={{ fontSize: 13, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
                   🔗 View on Explorer →
                 </a>
