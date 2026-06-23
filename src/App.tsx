@@ -284,7 +284,7 @@ export default function App() {
           {logs.map((l, i) => (
             <div key={i} style={{
               fontSize: 20, lineHeight: 2,
-              color: "#00bfff",
+              color: "#00ff41",
               marginBottom: 6,
               borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000',
               paddingLeft: 8
