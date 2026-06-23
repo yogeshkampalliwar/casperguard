@@ -283,7 +283,7 @@ export default function App() {
           <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
           {logs.map((l, i) => (
             <div key={i} style={{
-              fontSize: 20, lineHeight: 2,
+              fontSize: 22, lineHeight: 2.2,
               color: "#00ff41",
               marginBottom: 6,
               borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000',
