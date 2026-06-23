@@ -147,7 +147,7 @@ export default function App() {
   }, [])
 
   const card = {
-    background: 'rgba(15,0,0,0.93)',
+    background: 'rgba(20,24,29,0.93)',
     border: '1px solid #2a0000',
     borderRadius: 16,
     padding: '16px',
@@ -160,7 +160,7 @@ export default function App() {
       position: 'relative',
       width: '100%',
       minHeight: 'auto',
-      background: '#080000',
+      background: '#0B0E11',
       color: '#fff',
       overflowX: 'hidden',
       overflowY: 'auto',
@@ -194,13 +194,13 @@ export default function App() {
         {/* Stats Row */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
           {[
-            { label: 'BLOCK', value: blockHeight ? blockHeight.toString() : '...', color: '#ffff00' },
-            { label: 'CSPR', value: csprPrice ? `$${csprPrice.toFixed(6)}` : '...', color: '#ffff00' },
-            { label: 'NETWORK', value: 'TESTNET', color: '#ffff00' }
+            { label: 'BLOCK', value: blockHeight ? blockHeight.toString() : '...', color: '#F0B90B' },
+            { label: 'CSPR', value: csprPrice ? `$${csprPrice.toFixed(6)}` : '...', color: '#F0B90B' },
+            { label: 'NETWORK', value: 'TESTNET', color: '#F0B90B' }
           ].map(s => (
             <div key={s.label} style={{ ...card, padding: '14px 8px', textAlign: 'center' }}>
               <div style={{ fontSize: 20, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
-              <div style={{ fontSize: 20, fontWeight: 'bold', color: s.color }}>{s.value}</div>
+              <div style={{ fontSize: 20, fontWeight: 'bold', color: '#F0B90B' }}>{s.value}</div>
             </div>
           ))}
         </div>
@@ -208,7 +208,7 @@ export default function App() {
         {/* Contract */}
         <div style={{ ...card, border: '1px solid #ff3333' }}>
           <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
-          <div style={{ fontSize: 17, color: '#ffff00', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
+          <div style={{ fontSize: 17, color: '#F0B90B', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
           <a href={`https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`} target="_blank" rel="noreferrer"
             style={{ display: 'block', marginTop: 12, fontSize: 19, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
             🔗 View on Explorer →
@@ -218,13 +218,13 @@ export default function App() {
         {/* Agent Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
           {[
-            { label: 'TOTAL', value: stats.total, color: '#ffff00', bg: '#111' },
-            { label: 'APPROVED', value: stats.approved, color: '#ffff00', bg: '#001a0d' },
-            { label: 'BLOCKED', value: stats.blocked, color: '#ffff00', bg: '#1a0000' }
+            { label: 'TOTAL', value: stats.total, color: '#F0B90B', bg: '#111' },
+            { label: 'APPROVED', value: stats.approved, color: '#F0B90B', bg: '#001a0d' },
+            { label: 'BLOCKED', value: stats.blocked, color: '#F0B90B', bg: '#1a0000' }
           ].map(s => (
             <div key={s.label} style={{ ...card, background: s.bg, textAlign: 'center' }}>
               <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
-              <div style={{ fontSize: 36, fontWeight: 'bold', color: s.color }}>{s.value}</div>
+              <div style={{ fontSize: 36, fontWeight: 'bold', color: '#F0B90B' }}>{s.value}</div>
             </div>
           ))}
         </div>
@@ -263,12 +263,12 @@ export default function App() {
                   <span style={{ fontSize: 20, color: tx.status === 'Success' ? '#00ff88' : '#ff3333', fontWeight: 'bold' }}>
                     ● {tx.status}
                   </span>
-                  <span style={{ fontSize: 20, color: '#ffff00' }}>{new Date(tx.timestamp).toLocaleString()}</span>
+                  <span style={{ fontSize: 20, color: '#F0B90B' }}>{new Date(tx.timestamp).toLocaleString()}</span>
                 </div>
-                <div style={{ fontSize: 20, color: '#ffff00', wordBreak: 'break-all', marginBottom: 4 }}>
+                <div style={{ fontSize: 20, color: '#F0B90B', wordBreak: 'break-all', marginBottom: 4 }}>
                   TX: {tx.deploy_hash.slice(0, 24)}...
                 </div>
-                <div style={{ fontSize: 20, color: '#ffff00', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
+                <div style={{ fontSize: 20, color: '#F0B90B', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
                 <a href={`${EXPLORER}/transaction/${tx.deploy_hash}`} target="_blank" rel="noreferrer"
                   style={{ fontSize: 19, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
                   🔗 View on Explorer →
