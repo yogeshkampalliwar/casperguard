@@ -201,7 +201,7 @@ export default function App() {
             background: 'linear-gradient(90deg,#ff3333,#fff,#ff3333)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>CASPERGUARD</div>
-          <div style={{ fontSize: 12, color: '#666', letterSpacing: 3, marginTop: 6 }}>
+          <div style={{ fontSize: 12, color: '#f0a500', letterSpacing: 3, marginTop: 6 }}>
             AI AGENT SECURITY LAYER • CASPER TESTNET
           </div>
         </div>
@@ -214,7 +214,7 @@ export default function App() {
             { label: 'NETWORK', value: 'TESTNET', color: '#ff6666' }
           ].map(s => (
             <div key={s.label} style={{ ...card, padding: '14px 8px', textAlign: 'center' }}>
-              <div style={{ fontSize: 10, color: '#555', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 14, color: '#555', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: s.color }}>{s.value}</div>
             </div>
           ))}
