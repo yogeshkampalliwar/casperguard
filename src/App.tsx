@@ -159,7 +159,7 @@ export default function App() {
       fontFamily: "'Courier New', monospace",
       position: 'relative',
       width: '100%',
-      minHeight: '100vh',
+      minHeight: 'auto',
       background: '#080000',
       color: '#fff',
       overflowX: 'hidden',
@@ -174,7 +174,7 @@ export default function App() {
       <div style={{
         position: 'relative', zIndex: 10,
         maxWidth: 900, margin: '0 auto',
-        padding: '28px 18px 20px',
+        padding: '28px 18px 10px',
         boxSizing: 'border-box',
       }}>
 
@@ -186,7 +186,7 @@ export default function App() {
             background: 'linear-gradient(90deg,#ff3333,#fff,#ff3333)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>CASPERGUARD</div>
-          <div style={{ fontSize: 16, color: '#fff', letterSpacing: 3, marginTop: 6 }}>
+          <div style={{ fontSize: 20, color: '#fff', letterSpacing: 3, marginTop: 6 }}>
             AI AGENT SECURITY LAYER • CASPER TESTNET
           </div>
         </div>
@@ -199,18 +199,18 @@ export default function App() {
             { label: 'NETWORK', value: 'TESTNET', color: '#ffff00' }
           ].map(s => (
             <div key={s.label} style={{ ...card, padding: '14px 8px', textAlign: 'center' }}>
-              <div style={{ fontSize: 16, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
-              <div style={{ fontSize: 16, fontWeight: 'bold', color: s.color }}>{s.value}</div>
+              <div style={{ fontSize: 20, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 20, fontWeight: 'bold', color: s.color }}>{s.value}</div>
             </div>
           ))}
         </div>
 
         {/* Contract */}
         <div style={{ ...card, border: '1px solid #ff3333' }}>
-          <div style={{ fontSize: 13, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
-          <div style={{ fontSize: 13, color: '#ffff00', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
+          <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
+          <div style={{ fontSize: 17, color: '#ffff00', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
           <a href={`https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`} target="_blank" rel="noreferrer"
-            style={{ display: 'block', marginTop: 12, fontSize: 15, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
+            style={{ display: 'block', marginTop: 12, fontSize: 19, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
             🔗 View on Explorer →
           </a>
         </div>
@@ -223,7 +223,7 @@ export default function App() {
             { label: 'BLOCKED', value: stats.blocked, color: '#ffff00', bg: '#1a0000' }
           ].map(s => (
             <div key={s.label} style={{ ...card, background: s.bg, textAlign: 'center' }}>
-              <div style={{ fontSize: 13, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
               <div style={{ fontSize: 36, fontWeight: 'bold', color: s.color }}>{s.value}</div>
             </div>
           ))}
@@ -247,7 +247,7 @@ export default function App() {
             width: '100%', padding: '16px',
             background: 'transparent', border: '1px solid #ff3333',
             borderRadius: 14, color: '#ff6666', fontWeight: 'bold',
-            fontSize: 15, cursor: 'pointer', fontFamily: 'monospace',
+            fontSize: 19, cursor: 'pointer', fontFamily: 'monospace',
             letterSpacing: 2, marginBottom: 14
           }}>
           {loading ? '🔍 FETCHING...' : '🔗 FETCH TRANSACTIONS'}
@@ -256,21 +256,21 @@ export default function App() {
         {/* Transactions */}
         {transactions.length > 0 && (
           <div style={card}>
-            <div style={{ fontSize: 13, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>ON-CHAIN TRANSACTIONS</div>
+            <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>ON-CHAIN TRANSACTIONS</div>
             {transactions.map(tx => (
               <div key={tx.deploy_hash}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                  <span style={{ fontSize: 16, color: tx.status === 'Success' ? '#00ff88' : '#ff3333', fontWeight: 'bold' }}>
+                  <span style={{ fontSize: 20, color: tx.status === 'Success' ? '#00ff88' : '#ff3333', fontWeight: 'bold' }}>
                     ● {tx.status}
                   </span>
-                  <span style={{ fontSize: 16, color: '#ffff00' }}>{new Date(tx.timestamp).toLocaleString()}</span>
+                  <span style={{ fontSize: 20, color: '#ffff00' }}>{new Date(tx.timestamp).toLocaleString()}</span>
                 </div>
-                <div style={{ fontSize: 16, color: '#ffff00', wordBreak: 'break-all', marginBottom: 4 }}>
+                <div style={{ fontSize: 20, color: '#ffff00', wordBreak: 'break-all', marginBottom: 4 }}>
                   TX: {tx.deploy_hash.slice(0, 24)}...
                 </div>
-                <div style={{ fontSize: 16, color: '#ffff00', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
+                <div style={{ fontSize: 20, color: '#ffff00', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
                 <a href={`${EXPLORER}/transaction/${tx.deploy_hash}`} target="_blank" rel="noreferrer"
-                  style={{ fontSize: 15, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
+                  style={{ fontSize: 19, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
                   🔗 View on Explorer →
                 </a>
               </div>
@@ -280,10 +280,10 @@ export default function App() {
 
         {/* Agent Feed */}
         <div style={card}>
-          <div style={{ fontSize: 13, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
+          <div style={{ fontSize: 17, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
           {logs.map((l, i) => (
             <div key={i} style={{
-              fontSize: 18, lineHeight: 1.8,
+              fontSize: 20, lineHeight: 2,
               color: "#00bfff",
               marginBottom: 6,
               borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000',
@@ -293,7 +293,7 @@ export default function App() {
         </div>
 
         {/* Footer */}
-        <div style={{ textAlign: 'center', fontSize: 13, color: '#222', letterSpacing: 3, marginTop: 8 }}>
+        <div style={{ textAlign: 'center', fontSize: 17, color: '#222', letterSpacing: 3, marginTop: 8 }}>
           CASPERGUARD • CASPER INNOVATION TRACK 2026
         </div>
       </div>
