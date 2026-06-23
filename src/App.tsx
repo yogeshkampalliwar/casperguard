@@ -210,7 +210,7 @@ export default function App() {
         <div style={{ ...card, border: '1px solid #ff3333' }}>
           <div style={{ fontSize: 11, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
           <div style={{ fontSize: 11, color: '#ffff00', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
-          <a href={`${EXPLORER}/contract/${CONTRACT_HASH}`} target="_blank" rel="noreferrer"
+          <a href={`https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`} target="_blank" rel="noreferrer"
             style={{ display: 'block', marginTop: 12, fontSize: 13, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
             🔗 View on Explorer →
           </a>
