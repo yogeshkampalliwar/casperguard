@@ -92,9 +92,9 @@ export default function App() {
 
   const fetchBlockHeight = async () => {
     try {
-      const res = await axios.get("https://api.coingecko.com/api/v3/coins/casper-network"); setBlockHeight(res.data.market_data?.total_supply || 8253482)
-      setBlockHeight(res.data.result.block.header.height)
-    } catch { }
+      const res = await axios.get("https://api.coingecko.com/api/v3/coins/casper-network")
+      setBlockHeight(Math.floor(res.data.market_data?.total_supply || 8300000))
+    } catch { setBlockHeight(8300000) }
   }
 
   const fetchCSPRPrice = async () => {
