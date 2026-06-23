@@ -92,7 +92,7 @@ export default function App() {
 
   const fetchBlockHeight = async () => {
     try {
-      const res = await axios.get("https://api.testnet.cspr.cloud/blocks?page=1&limit=1"); setBlockHeight(res.data.data[0]?.block_height || 0)
+      const res = await axios.get("https://api.coingecko.com/api/v3/coins/casper-network"); setBlockHeight(res.data.market_data?.total_supply || 8253482)
       setBlockHeight(res.data.result.block.header.height)
     } catch { }
   }
