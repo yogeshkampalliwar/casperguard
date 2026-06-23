@@ -198,7 +198,7 @@ export default function App() {
             background: 'linear-gradient(90deg,#ff3333,#fff,#ff3333)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>CASPERGUARD</div>
-          <div style={{ fontSize: 12, color: '#f0a500', letterSpacing: 3, marginTop: 6 }}>
+          <div style={{ fontSize: 12, color: '#fff', letterSpacing: 3, marginTop: 6 }}>
             AI AGENT SECURITY LAYER • CASPER TESTNET
           </div>
         </div>
@@ -206,12 +206,12 @@ export default function App() {
         {/* Stats Row */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
           {[
-            { label: 'BLOCK', value: blockHeight ? blockHeight.toString() : '...', color: '#00ff88' },
-            { label: 'CSPR', value: csprPrice ? `$${csprPrice.toFixed(6)}` : '...', color: '#fff' },
-            { label: 'NETWORK', value: 'TESTNET', color: '#ff6666' }
+            { label: 'BLOCK', value: blockHeight ? blockHeight.toString() : '...', color: '#ffff00' },
+            { label: 'CSPR', value: csprPrice ? `$${csprPrice.toFixed(6)}` : '...', color: '#ffff00' },
+            { label: 'NETWORK', value: 'TESTNET', color: '#ffff00' }
           ].map(s => (
             <div key={s.label} style={{ ...card, padding: '14px 8px', textAlign: 'center' }}>
-              <div style={{ fontSize: 14, color: '#555', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 14, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
               <div style={{ fontSize: 14, fontWeight: 'bold', color: s.color }}>{s.value}</div>
             </div>
           ))}
@@ -219,8 +219,8 @@ export default function App() {
 
         {/* Contract */}
         <div style={{ ...card, border: '1px solid #ff3333' }}>
-          <div style={{ fontSize: 11, color: '#ff3333', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
-          <div style={{ fontSize: 11, color: '#ff9999', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
+          <div style={{ fontSize: 11, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>DEPLOYED CONTRACT</div>
+          <div style={{ fontSize: 11, color: '#ffff00', wordBreak: 'break-all', lineHeight: 1.6 }}>{CONTRACT_HASH}</div>
           <a href={`${EXPLORER}/contract/${CONTRACT_HASH}`} target="_blank" rel="noreferrer"
             style={{ display: 'block', marginTop: 12, fontSize: 13, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
             🔗 View on Explorer →
@@ -230,12 +230,12 @@ export default function App() {
         {/* Agent Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 12 }}>
           {[
-            { label: 'TOTAL', value: stats.total, color: '#fff', bg: '#111' },
-            { label: 'APPROVED', value: stats.approved, color: '#00ff88', bg: '#001a0d' },
-            { label: 'BLOCKED', value: stats.blocked, color: '#ff3333', bg: '#1a0000' }
+            { label: 'TOTAL', value: stats.total, color: '#ffff00', bg: '#111' },
+            { label: 'APPROVED', value: stats.approved, color: '#ffff00', bg: '#001a0d' },
+            { label: 'BLOCKED', value: stats.blocked, color: '#ffff00', bg: '#1a0000' }
           ].map(s => (
             <div key={s.label} style={{ ...card, background: s.bg, textAlign: 'center' }}>
-              <div style={{ fontSize: 11, color: '#555', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
+              <div style={{ fontSize: 11, color: '#fff', letterSpacing: 2, marginBottom: 6 }}>{s.label}</div>
               <div style={{ fontSize: 36, fontWeight: 'bold', color: s.color }}>{s.value}</div>
             </div>
           ))}
@@ -268,19 +268,19 @@ export default function App() {
         {/* Transactions */}
         {transactions.length > 0 && (
           <div style={card}>
-            <div style={{ fontSize: 11, color: '#ff3333', letterSpacing: 2, marginBottom: 12 }}>ON-CHAIN TRANSACTIONS</div>
+            <div style={{ fontSize: 11, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>ON-CHAIN TRANSACTIONS</div>
             {transactions.map(tx => (
               <div key={tx.deploy_hash}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
                   <span style={{ fontSize: 14, color: tx.status === 'Success' ? '#00ff88' : '#ff3333', fontWeight: 'bold' }}>
                     ● {tx.status}
                   </span>
-                  <span style={{ fontSize: 12, color: '#555' }}>{new Date(tx.timestamp).toLocaleString()}</span>
+                  <span style={{ fontSize: 12, color: '#ffff00' }}>{new Date(tx.timestamp).toLocaleString()}</span>
                 </div>
-                <div style={{ fontSize: 12, color: '#ff9999', wordBreak: 'break-all', marginBottom: 4 }}>
+                <div style={{ fontSize: 12, color: '#ffff00', wordBreak: 'break-all', marginBottom: 4 }}>
                   TX: {tx.deploy_hash.slice(0, 24)}...
                 </div>
-                <div style={{ fontSize: 12, color: '#555', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
+                <div style={{ fontSize: 12, color: '#ffff00', marginBottom: 8 }}>Cost: {tx.cost} motes</div>
                 <a href={`${EXPLORER}/transaction/${tx.deploy_hash}`} target="_blank" rel="noreferrer"
                   style={{ fontSize: 13, color: '#ff6666', textDecoration: 'none', fontWeight: 'bold' }}>
                   🔗 View on Explorer →
@@ -292,7 +292,7 @@ export default function App() {
 
         {/* Agent Feed */}
         <div style={card}>
-          <div style={{ fontSize: 11, color: '#ff3333', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
+          <div style={{ fontSize: 11, color: '#fff', letterSpacing: 2, marginBottom: 12 }}>⚡ AGENT FEED</div>
           {logs.map((l, i) => (
             <div key={i} style={{
               fontSize: 13, lineHeight: 1.6,
