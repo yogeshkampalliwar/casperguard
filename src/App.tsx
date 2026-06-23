@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 const CONTRACT_HASH = 'hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0'
-const RPC_URL = 'https://node.testnet.casper.network/rpc'
+const RPC_URL = 'https://rpc.testnet.casperlabs.io/rpc'
 const EXPLORER = 'https://testnet.cspr.live'
 
 interface Transaction {
