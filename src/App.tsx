@@ -174,7 +174,7 @@ export default function App() {
       <div style={{
         position: 'relative', zIndex: 10,
         maxWidth: 900, margin: '0 auto',
-        padding: '28px 18px 100px',
+        padding: '28px 18px 20px',
         boxSizing: 'border-box',
       }}>
 
@@ -284,7 +284,7 @@ export default function App() {
           {logs.map((l, i) => (
             <div key={i} style={{
               fontSize: 18, lineHeight: 1.8,
-              color: i === 0 ? "#00bfff" : "#4da6ff",
+              color: "#00bfff",
               marginBottom: 6,
               borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000',
               paddingLeft: 8
