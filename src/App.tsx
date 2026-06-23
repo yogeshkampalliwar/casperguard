@@ -92,7 +92,7 @@ export default function App() {
 
   const fetchBlockHeight = async () => {
     try {
-      const res = await axios.post(RPC_URL, { jsonrpc: '2.0', method: 'chain_get_block', params: [], id: 1 })
+      const res = await axios.get("https://api.testnet.cspr.cloud/blocks?page=1&limit=1"); setBlockHeight(res.data.data[0]?.block_height || 0)
       setBlockHeight(res.data.result.block.header.height)
     } catch { }
   }
