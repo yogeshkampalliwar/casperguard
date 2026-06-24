@@ -90,7 +90,9 @@ export default function App() {
   const addLog = (msg: string) => setLogs(prev => [`[${new Date().toLocaleTimeString()}] ${msg}`, ...prev.slice(0, 9)])
 
   const fetchBlockHeight = async () => {
-    setBlockHeight(8253482 + Math.floor((Date.now() - 1750550000000) / 8000))
+    const base = 8253482
+    const elapsed = Math.floor((Date.now() - 1750550000000) / 8000)
+    setBlockHeight(base + elapsed)
   }
 
   const fetchCSPRPrice = async () => {
