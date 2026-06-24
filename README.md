@@ -1,76 +1,135 @@
-# CasperGuard 🛡️
+# 🛡️ CasperGuard
 
-**The pre-payment firewall for x402 AI agents on Casper.**
+**AI Agent Security Layer for Casper Network**
 
-x402 lets AI agents pay per request — autonomously, with no human approval. That power cuts both ways: a misbehaving, compromised, or simply buggy agent can drain a wallet just as fast as it can pay a legitimate invoice. CasperGuard is the on-chain spending firewall that sits in front of every x402 call an agent makes, enforcing hard limits **before** money moves.
+CasperGuard is an autonomous AI security agent that monitors and risk-scores AI-driven transactions on the Casper blockchain. It automatically approves low-risk transactions and blocks high-risk ones — all on-chain, no human in the loop.
 
-## Live Demo
+> Built for the **Casper Agentic Buildathon 2026**
 
-🌐 **App**: https://casperguard-bay.vercel.app
-📦 **Contract**: `hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`
-🔗 **Explorer**: https://testnet.cspr.live/contract/hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
+---
 
-## The problem with autonomous x402 spending
+## 🎯 Problem
 
-x402 turns the HTTP 402 status code into a live payment handshake: an agent calls an endpoint, gets a price, signs a payment, and the resource is delivered — all without a human in the loop. That's the whole point of the protocol, and it's why Casper shipped an x402 Facilitator on mainnet.
+As AI agents autonomously execute transactions on-chain, there is no security layer to detect and block high-risk or malicious activity in real time. CasperGuard solves this.
 
-But removing the human approval step also removes the human *judgment* step. Today, nothing on-chain stops an agent from:
+---
 
-- Paying the same invoice twice (replay)
-- Blowing through a budget in one bad loop
-- Sending an outsized payment to a single call because of a bug or a malicious prompt
+## ✅ Solution
 
-Escrow protocols fix what happens **after** a bad payment lands — they hold funds and refund on bad delivery. CasperGuard fixes it **before** the payment is even attempted, by giving every agent a hard-coded, on-chain spending policy that the agent itself cannot override.
+CasperGuard acts as an AI-powered firewall for autonomous agent transactions on Casper Network:
 
-## How it works
-AI Agent wants to pay via x402
-│
-▼
-secure_transaction(agent_id, amount, service_id, proof_hash)
-│
-▼
-┌───────────────────────────────┐
-│      CasperGuard Contract      │
-│  1. Already-paid this invoice? │── yes ──▶ ❌ BLOCKED (DuplicateTransaction)
-│  2. Over the per-call limit?   │── yes ──▶ ❌ BLOCKED (ExceedsMaxPerCall)
-│  3. Over today's budget?       │── yes ──▶ ❌ BLOCKED (ExceedsDailyBudget)
-└───────────────────────────────┘
-│ all checks pass
-▼
-✅ APPROVED → recorded on-chain → agent reputation++ → x402 payment proceeds
-Every approval and every block is an on-chain event (`TransactionApproved`, `TransactionBlocked`, `SettlementRecorded`) — a permanent, auditable record of how disciplined (or not) an agent has been with its wallet.
+- Monitors incoming AI agent transactions in real time
+- Scores each transaction by risk level (LOW / MEDIUM / HIGH)
+- Automatically APPROVES or BLOCKS based on risk score
+- Logs all decisions on-chain via deployed smart contract
 
-## Smart contract entry points
+---
 
-| Function | Description |
-|---|---|
-| `register_agent(agent_id, daily_budget_cspr, max_per_call_cspr)` | Onboard an agent with a hard spending policy |
-| `secure_transaction(agent_id, amount, service_id, proof_hash)` | Validate a payment against the policy before it's allowed to proceed |
-| `reset_daily_budget(agent_id)` | Owner-only daily reset |
-| `get_agent_reputation(agent_id)` | On-chain trust score, built from clean transaction history |
-| `get_total_settlements()` / `get_total_blocked()` | Network-wide visibility into agent behavior |
+## 🔧 Tech Stack
 
-## Why this matters for the x402 economy
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19 + TypeScript + Vite |
+| AI Agent | Python 3 (autonomous risk scoring) |
+| Smart Contract | Rust + Odra Framework (WebAssembly) |
+| Blockchain | Casper Network Testnet |
+| SDK | casper-js-sdk v5 |
+| Deployment | Vercel (frontend) |
 
-Casper's x402 Facilitator removes friction from agent payments. CasperGuard puts the friction back exactly where it belongs — between a misbehaving agent and your wallet — without slowing down legitimate spending at all. It's the missing spending-policy layer underneath the protocol, the same way card networks added fraud limits on top of "any merchant can charge any card."
+---
 
-## Tech stack
+## 🧠 How AI Risk Scoring Works
 
-- **Contract**: Rust + [Odra](https://odra.dev) 2.8.1 → WASM, deployed on Casper Testnet (Casper 2.0 / Condor)
-- **Frontend**: React + TypeScript + Vite, live RPC calls to a Casper node
-- **Network**: Casper Testnet (`casper-test`)
+The AI agent evaluates each transaction using rule-based scoring:
 
-## Verified on-chain
+| Condition | Risk Score |
+|-----------|-----------|
+| Amount > 100 CSPR | +3 (HIGH RISK) |
+| Amount > 10 CSPR | +1 (MEDIUM RISK) |
+| Known test agent | -1 (trusted) |
 
-- **Install transaction**: `3bb468313efb823a81d3350ab8f2024687c1d9218a4a41d86d8f3429e7af5bfb` — Status: ✅ Success
-- View live on [CSPR.live](https://testnet.cspr.live)
+- Score ≥ 3 → **BLOCKED** 🔴
+- Score 1-2 → **MEDIUM RISK** 🟡
+- Score = 0 → **APPROVED** 🟢
 
-## Run locally
+---
 
+## 📦 Project Structure
+
+```
+casperguard/
+├── contract/          # Rust smart contract (Odra)
+│   └── src/
+│       └── lib.rs
+├── src/               # React frontend
+├── worker/
+│   └── agent.py       # Python AI agent
+├── public/
+├── index.html
+└── package.json
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- Python 3.10+
+- Rust + Cargo
+- Odra CLI
+
+### Frontend
 ```bash
-# Contract
-cd contract && cargo odra build -b casper
+npm install
+npm run dev
+```
 
-# Frontend
-cd casperguard-web && npm install && npm run dev
+### AI Agent
+```bash
+cd worker
+pip install requests
+python agent.py
+```
 
+### Smart Contract
+```bash
+cd contract
+cargo odra build
+```
+
+---
+
+## 🌐 Live Demo
+
+- **App:** https://casperguard-bay.vercel.app
+- **Contract:** `hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`
+- **Explorer:** https://testnet.cspr.live/contract/hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
+
+---
+
+## 📊 Example Agent Output
+
+```
+🛡️ CasperGuard AI Security Agent Starting...
+
+🟢 Agent: trading-bot-001 | 5 CSPR | price-feed → APPROVED (score=0)
+🔴 Agent: defi-agent-007 | 150 CSPR | swap      → BLOCKED  (score=3)
+🟢 Agent: rwa-oracle-003 | 2 CSPR  | data-update→ APPROVED (score=0)
+
+Summary: 2 approved, 1 blocked
+```
+
+---
+
+## 👤 Builder
+
+**Yogesh Kampalliwar**
+- GitHub: [@yogeshkampalliwar](https://github.com/yogeshkampalliwar)
+- Twitter: [@yogeshr50283421](https://twitter.com/yogeshr50283421)
+
+---
+
+## 📄 License
+
+MIT
