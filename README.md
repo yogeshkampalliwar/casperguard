@@ -105,7 +105,7 @@ cargo odra build
 - **App:** https://casperguard-bay.vercel.app
 - **Contract:** `hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0`
 - **Explorer:** https://testnet.cspr.live/contract/hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
-
+      video link youtube https://youtube.com/shorts/hCfUkW8m-ZU?si=_dEUV-TtEqfr18uG
 ---
 
 ## 📊 Example Agent Output
