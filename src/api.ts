@@ -61,20 +61,21 @@ export async function getAccountBalance(publicKey: string): Promise<number> {
 }
 
 // Real x402 EIP-712 payment authorization for Casper
-import { hashTypedData, TransferAuthorizationTypes } from '@casper-ecosystem/casper-eip-712'
 
 const X402_DOMAIN = {
   name: 'CasperGuard x402',
   version: '1',
-  chainId: 5003, // Casper Testnet
+  chainId: 5003,
 }
 
-export function createX402PaymentAuth(
+
+
+export async function createX402PaymentAuth(
   from: string,
   to: string,
   amountMotes: bigint,
   nonce: string
-) {
+): Promise<{ digest: string; auth: object }> {
   const auth = {
     from,
     to,
@@ -83,14 +84,11 @@ export function createX402PaymentAuth(
     valid_before: Math.floor(Date.now() / 1000) + 300,
     nonce,
   }
-
-  const digest = hashTypedData(X402_DOMAIN, TransferAuthorizationTypes, auth)
-
-  return {
-    digest,
-    auth,
-    payment_header: `x402 digest=${digest} nonce=${nonce}`
-  }
+  const encoder = new TextEncoder()
+  const raw = encoder.encode(JSON.stringify({ domain: X402_DOMAIN, ...auth }))
+  const hashBuf = await crypto.subtle.digest('SHA-256', raw)
+  const digest = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, '0')).join('')
+  return { digest, auth }
 }
 
 export async function x402PayForService(
@@ -100,14 +98,9 @@ export async function x402PayForService(
 ): Promise<{ success: boolean; receipt?: string; error?: string }> {
   try {
     const nonce = '0x' + crypto.randomUUID().replace(/-/g, '')
-    const { digest, payment_header } = createX402PaymentAuth(
-      fromKey, serviceUrl, amountMotes, nonce
-    )
-    return {
-      success: true,
-      receipt: digest,
-    }
-  } catch (e: any) {
-    return { success: false, error: e.message }
+    const { digest } = await createX402PaymentAuth(fromKey, serviceUrl, amountMotes, nonce)
+    return { success: true, receipt: digest }
+  } catch (err: unknown) {
+    return { success: false, error: String(err) }
   }
 }

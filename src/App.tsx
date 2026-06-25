@@ -67,7 +67,7 @@ export default function App() {
         setCsprPrice(price)
         setBalance(bal)
         addLog(`✅ Real block: ${height.toLocaleString()} | CSPR: $${price}`)
-      } catch (e) {
+      } catch {
         addLog('⚠️ Network error - retrying...')
       }
     }
@@ -102,7 +102,7 @@ export default function App() {
 
   const runSwap = async () => {
     if (!swapAmount) return
-    const { risk, score } = aiRiskScore(parseFloat(swapAmount), 'swap-user')
+    const { score } = aiRiskScore(parseFloat(swapAmount), 'swap-user')
     addLog(`⚡ x402 fee: ${(parseFloat(swapAmount) * 0.001).toFixed(4)} CSPR`)
     await new Promise(r => setTimeout(r, 500))
     const result = score >= 3 ? 'HIGH RISK — BLOCKED 🔴' : 'LOW RISK — APPROVED ✅'
@@ -287,7 +287,7 @@ export default function App() {
         {activeTab === 'x402' && (
           <div style={card}>
             <div style={{ fontSize: 16, color: '#ff6666', fontWeight: 'bold', marginBottom: 16 }}>⚡ x402 Payment Gateway</div>
-            <select style={inputStyle} onChange={e => setX402Status('')}>
+            <select style={inputStyle} onChange={_ => setX402Status('')}>
               <option value="risk-scan">Risk Scan — 0.001 CSPR</option>
               <option value="price-feed">Price Feed — 0.0005 CSPR</option>
               <option value="data-update">Data Update — 0.002 CSPR</option>
