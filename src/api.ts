@@ -18,6 +18,14 @@ export async function getCSPRPrice(): Promise<number> {
   return data['casper-network']?.usd || 0
 }
 
+export async function getOilPrice(): Promise<number> {
+  try {
+    const r = await fetch('https://api.api-ninjas.com/v1/commodityprice?name=crude_oil', {headers: {'X-Api-Key': 'demo'}})
+    const d = await r.json()
+    return d?.price || 78.20
+  } catch { return 78.20 }
+}
+
 export async function getGoldPrice(): Promise<number> {
   try {
     const r = await fetch('https://api.coinbase.com/v2/prices/XAU-USD/spot')
