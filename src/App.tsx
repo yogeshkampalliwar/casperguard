@@ -64,7 +64,7 @@ export default function App() {
       <div style={{ maxWidth: 700, margin: '0 auto', padding: '28px 18px', boxSizing: 'border-box' as const }}>
 
         <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <div style={{ fontSize: 48 }}>shield</div>
+          <div style={{ fontSize: 48 }}>🛡️</div>
           <div style={{ fontSize: 36, fontWeight: 'bold', letterSpacing: 5, background: 'linear-gradient(90deg,#ff3333,#fff,#ff3333)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>CASPERGUARD</div>
           <div style={{ fontSize: 13, color: '#aaa', letterSpacing: 3, marginTop: 6 }}>AI AGENT SECURITY LAYER - CASPER TESTNET</div>
         </div>
