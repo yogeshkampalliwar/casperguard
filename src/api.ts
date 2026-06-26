@@ -1,5 +1,5 @@
 // Real Casper Network API calls
-const RPC_URL = 'https://node.testnet.casper.network/rpc'
+const RPC_URL = 'https://rpc.testnet.casperlabs.io'
 const COINGECKO = 'https://api.coingecko.com/api/v3'
 
 export async function getBlockHeight(): Promise<number> {
