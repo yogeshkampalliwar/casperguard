@@ -20,9 +20,9 @@ export async function getCSPRPrice(): Promise<number> {
 
 export async function getGoldPrice(): Promise<number> {
   try {
-    const r = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d')
+    const r = await fetch('https://api.coinbase.com/v2/prices/XAU-USD/spot')
     const data = await r.json()
-    return data?.chart?.result?.[0]?.meta?.regularMarketPrice || 2345.50
+    return parseFloat(data?.data?.amount) || 2345.50
   } catch {
     return 2345.50
   }
