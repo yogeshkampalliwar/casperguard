@@ -20,9 +20,9 @@ export async function getCSPRPrice(): Promise<number> {
 
 export async function getGoldPrice(): Promise<number> {
   try {
-    const r = await fetch('https://api.metals.live/v1/spot/gold')
+    const r = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/GC=F?interval=1d')
     const data = await r.json()
-    return data[0]?.price || 2345.50
+    return data?.chart?.result?.[0]?.meta?.regularMarketPrice || 2345.50
   } catch {
     return 2345.50
   }
