@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getBlockHeight, getCSPRPrice, getGoldPrice, aiRiskScore, getAccountBalance } from './api'
+import { connectCasperWallet, getWalletBalance } from './wallet'
 
 const CONTRACT_HASH = 'hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0'
 const EXPLORER = 'https://testnet.cspr.live'
@@ -171,6 +172,21 @@ export default function App() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <div style={{ fontSize: 42 }}>🛡️</div>
+        <button onClick={async () => {
+          setWalletConnecting(true)
+          try {
+            const key = await connectCasperWallet()
+            setWalletKey(key)
+            const bal = await getWalletBalance(key)
+            setWalletBalance(bal)
+            addLog('✅ Wallet connected: ' + key.slice(0,12) + '...')
+          } catch(e) {
+            addLog('❌ ' + e)
+          }
+          setWalletConnecting(false)
+        }} style={{ marginTop: 10, padding: '10px 24px', background: walletKey ? 'linear-gradient(135deg,#006600,#00aa00)' : 'linear-gradient(135deg,#cc0000,#ff5555)', border: 'none', borderRadius: 10, color: '#fff', fontWeight: 'bold', fontSize: 14, cursor: 'pointer', fontFamily: 'monospace' }}>
+          {walletConnecting ? '⏳ CONNECTING...' : walletKey ? '✅ ' + walletKey.slice(0,10) + '... | ' + walletBalance.toFixed(2) + ' CSPR' : '🔗 CONNECT CASPER WALLET'}
+        </button>
           <div style={{ fontSize: 42, fontWeight: 'bold', letterSpacing: 5, background: 'linear-gradient(90deg,#ff3333,#fff,#ff3333)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>CASPERGUARD</div>
           <div style={{ fontSize: 16, color: '#fff', letterSpacing: 3, marginTop: 6 }}>AI AGENT SECURITY LAYER • CASPER TESTNET</div>
         </div>
