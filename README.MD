@@ -71,7 +71,7 @@ Summary: 2 approved, 1 blocked
 ## 📦 Project Structure
 
 casperguard/
-- contract/ — Rust smart contract (Odra)
+- 
 - src/ — React frontend
 - worker/ — Python AI agent (real RPC calls)
 - gitpaid/ — GitPaid Ethereum integration
@@ -111,3 +111,12 @@ Yogesh Kampalliwar
 ## 📄 License
 
 MIT
+
+## 📦 Project Structure
+
+```
+contract/   — Rust smart contract (Odra)
+src/        — React frontend  
+worker/     — Python AI agent (real RPC calls)
+gitpaid/    — GitPaid Ethereum integration
+```
