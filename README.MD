@@ -126,23 +126,18 @@ gitpaid/    — GitPaid Ethereum integration
 ```bash
 # Clone repo
 git clone https://github.com/yogeshkampalliwar/casperguard
-cd casperguard
+cd casperguard/src
 
 # Run Frontend
 npm install
 npm run dev
 
 # Run Real AI Agent
-cd worker
+cd /workspaces/casperguard/worker
 pip install requests
 python real_agent.py
 
-# Run GitPaid
-cd gitpaid
-npm install
-npm run dev
-
 # Build Smart Contract
-cd contract
+cd /workspaces/casperguard/contract
 cargo odra build
 ```
