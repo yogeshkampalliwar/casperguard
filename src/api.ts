@@ -3,7 +3,14 @@ const RPC_URL = 'https://node.testnet.casper.network/rpc'
 const COINGECKO = 'https://api.coingecko.com/api/v3'
 
 export async function getBlockHeight(): Promise<number> {
-  const r = await fetch(RPC_URL, {
+  try {
+    const r = await fetch('/api/block')
+    const data = await r.json()
+    return data.height
+  } catch { return 0 }
+}
+async function _unused(): Promise<number> {
+  const r = await fetch("/api/block")
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ jsonrpc: '2.0', method: 'chain_get_block', params: {}, id: 1 })
