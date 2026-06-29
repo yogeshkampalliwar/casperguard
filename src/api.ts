@@ -1,9 +1,9 @@
 // Real Casper Network API calls
-const RPC_URL = 'https://node.testnet.casper.network/rpc'
+const BACKEND_URL = 'http://localhost:3001'
 const COINGECKO = 'https://api.coingecko.com/api/v3'
 
 export async function getBlockHeight(): Promise<number> {
-  const r = await fetch(RPC_URL, {
+  const r = await fetch(BACKEND_URL + '/block', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ jsonrpc: '2.0', method: 'chain_get_block', params: {}, id: 1 })
