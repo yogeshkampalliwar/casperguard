@@ -120,3 +120,29 @@ src/        — React frontend
 worker/     — Python AI agent (real RPC calls)
 gitpaid/    — GitPaid Ethereum integration
 ```
+
+## 💻 Usage Commands
+
+```bash
+# Clone repo
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard
+
+# Run Frontend
+npm install
+npm run dev
+
+# Run Real AI Agent
+cd worker
+pip install requests
+python real_agent.py
+
+# Run GitPaid
+cd gitpaid
+npm install
+npm run dev
+
+# Build Smart Contract
+cd contract
+cargo odra build
+```
