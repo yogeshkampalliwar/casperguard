@@ -141,3 +141,61 @@ python real_agent.py
 cd /workspaces/casperguard/contract
 cargo odra build
 ```
+## Local Development & Sharing (LocalTunnel)
+
+### Running Locally
+```bash
+cd /workspaces/casperguard
+npm run dev -- --host
+
+This starts Vite dev server on http://localhost:5173
+Sharing Local Server Publicly (for team/demo)
+
+npx localtunnel --port 5173
+
+This generates a public URL like: https://random-name.loca.lt
+Error: "Blocked request. This host is not allowed"
+Problem: Vite blocks unknown hosts by default for security.
+Fix: Add allowedHosts: true in vite.config.ts:
+
+export default defineConfig({
+  server: { allowedHosts: true },
+  // ... rest of config
+})
+
+
+LocalTunnel IP Verification Page
+When opening a localtunnel link first time, you'll see:
+"Please proceed with caution. To continue, enter the IP shown above."
+This is normal security behavior from LocalTunnel.
+Steps to bypass:
+The page shows the tunnel host's IP address (e.g. 20.192.21.51)
+Copy that exact IP using the copy icon next to it
+Paste it into the "IP Address" input field
+Click Continue
+This confirms you trust the link sender. After this, the tunnel works normally.
+To skip this page programmatically (for automated testing):
+Add a custom request header: bypass-tunnel-reminder: true
+Important Notes
+LocalTunnel URLs are temporary — they change every time you restart the tunnel
+Free LocalTunnel URLs are not for production — only for local team demos
+For permanent public hosting, use Vercel (see deployment section above)
+EOF
+git add README.md && git commit -m "docs: add localtunnel setup, IP verification fix, and sharing guide"
+
+
+cat >> README.md << 'EOF'
+
+---
+
+## Bug Fix: Live Block showing 0
+
+**Problem:** Frontend called `/api/block` but Vite (port 5173) had no proxy to forward it to the backend (port 3001), so the request failed silently and Block always showed `0`.
+
+**Fix:** Added proxy in `vite.config.ts`:
+```ts
+server: {
+  proxy: { '/api': 'http://localhost:3001' }
+}
+
+
