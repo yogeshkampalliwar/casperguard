@@ -285,6 +285,25 @@ export default function App() {
           </>
         )}
 
+        {/* x402 Payments */}
+        <div style={{ background: 'rgba(20,15,0,0.95)', border: '1px solid #F0B90B', borderRadius: 16, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: 13, color: '#F0B90B', letterSpacing: 2, marginBottom: 8 }}>⚡ X402 MICROPAYMENTS</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 12 }}>
+            <div style={{ background: '#1a1400', borderRadius: 10, padding: 12, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, color: '#F0B90B', letterSpacing: 2 }}>TOTAL EARNED</div>
+              <div style={{ fontSize: 28, fontWeight: 'bold', color: '#F0B90B' }}>{totalEarned.toFixed(3)} ETH</div>
+            </div>
+            <div style={{ background: '#1a1400', borderRadius: 10, padding: 12, textAlign: 'center' }}>
+              <div style={{ fontSize: 11, color: '#F0B90B', letterSpacing: 2 }}>PER SCAN</div>
+              <div style={{ fontSize: 28, fontWeight: 'bold', color: '#F0B90B' }}>0.001 ETH</div>
+            </div>
+          </div>
+          {x402Payments.length === 0 && <div style={{ fontSize: 13, color: '#555', textAlign: 'center' }}>Run AI Agent to see payments</div>}
+          {x402Payments.map((p, i) => (
+            <div key={i} style={{ fontSize: 13, color: '#F0B90B', borderLeft: '2px solid #F0B90B', paddingLeft: 8, marginBottom: 6 }}>[{p.time}] ⚡ {p.agent} → {p.amount}</div>
+          ))}
+        </div>
+
         <div style={{ textAlign: 'center', fontSize: 10, color: '#333', marginTop: 12, letterSpacing: 3 }}>
           CASPERGUARD + GITPAID • CASPER & BASE NETWORK 2026
         </div>
