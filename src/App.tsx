@@ -20,6 +20,8 @@ export default function App() {
   const [csprPrice, setCsprPrice] = useState<number>(0)
   const [logs, setLogs] = useState<string[]>(['CasperGuard initialized...'])
   const [stats, setStats] = useState({ approved: 0, blocked: 0, total: 0 })
+  const [x402Payments, setX402Payments] = useState<{time: string, amount: string, agent: string}[]>([])
+  const [totalEarned, setTotalEarned] = useState(0)
   const [agentStatus, setAgentStatus] = useState<'idle' | 'running' | 'done'>('idle')
 
   const [account, setAccount] = useState('')
