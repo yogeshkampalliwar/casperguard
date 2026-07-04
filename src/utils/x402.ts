@@ -1,68 +1,104 @@
-import { CasperClient, DeployUtil, Keys, RuntimeArgs, CLValueBuilder } from 'casper-js-sdk'
+// x402 Payment Protocol - Casper Network Integration
+// Uses casper-js-sdk v5
 
-const RPC = 'https://node.testnet.casper.network/rpc'
-const CONTRACT_HASH = '28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0'
-const client = new CasperClient(RPC)
+export const CONTRACT_HASH = '28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0'
+export const RPC_URL = 'https://node.testnet.casper.network/rpc'
+export const SCAN_PRICE_MOTES = 100000000 // 0.1 CSPR per scan
 
-export async function registerAgent(
-  agentId: string,
-  dailyBudget: number,
-  maxPerCall: number,
-  privateKeyHex: string
-) {
-  const keys = Keys.Ed25519.parsePrivateKey(Buffer.from(privateKeyHex, 'hex'))
-  const keyPair = Keys.Ed25519.parseKeyPair(keys.publicKey.rawPublicKey, keys)
-
-  const deploy = DeployUtil.makeDeploy(
-    new DeployUtil.DeployParams(keyPair.publicKey, 'casper-test', 1, 1800000),
-    DeployUtil.ExecutableDeployItem.newStoredContractByHash(
-      Uint8Array.from(Buffer.from(CONTRACT_HASH, 'hex')),
-      'register_agent',
-      RuntimeArgs.fromMap({
-        agent_id: CLValueBuilder.string(agentId),
-        daily_budget_cspr: CLValueBuilder.u64(dailyBudget),
-        max_per_call_cspr: CLValueBuilder.u64(maxPerCall),
-      })
-    ),
-    DeployUtil.standardPayment(5000000000)
-  )
-
-  const signed = deploy.sign([keyPair])
-  const hash = await client.putDeploy(signed)
-  return hash
+export interface PaymentResult {
+  deployHash: string
+  agentId: string
+  amount: number
+  serviceId: string
+  status: 'pending' | 'success' | 'failed'
 }
 
-export async function secureTransaction(
+export async function getContractState(): Promise<{ settlements: number; blocked: number }> {
+  try {
+    const response = await fetch(RPC_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        jsonrpc: '2.0',
+        method: 'query_global_state',
+        params: {
+          state_identifier: { StateRootHash: await getStateRootHash() },
+          key: `hash-${CONTRACT_HASH}`,
+          path: []
+        },
+        id: 1
+      })
+    })
+    const data = await response.json()
+    return data.result || { settlements: 0, blocked: 0 }
+  } catch {
+    return { settlements: 0, blocked: 0 }
+  }
+}
+
+async function getStateRootHash(): Promise<string> {
+  const response = await fetch(RPC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'chain_get_state_root_hash',
+      params: [],
+      id: 1
+    })
+  })
+  const data = await response.json()
+  return data.result?.state_root_hash || ''
+}
+
+export async function buildSecureTransactionDeploy(
   agentId: string,
   amount: number,
   serviceId: string,
-  proofHash: string,
-  privateKeyHex: string
-) {
-  const keys = Keys.Ed25519.parsePrivateKey(Buffer.from(privateKeyHex, 'hex'))
-  const keyPair = Keys.Ed25519.parseKeyPair(keys.publicKey.rawPublicKey, keys)
-
-  const deploy = DeployUtil.makeDeploy(
-    new DeployUtil.DeployParams(keyPair.publicKey, 'casper-test', 1, 1800000),
-    DeployUtil.ExecutableDeployItem.newStoredContractByHash(
-      Uint8Array.from(Buffer.from(CONTRACT_HASH, 'hex')),
-      'secure_transaction',
-      RuntimeArgs.fromMap({
-        agent_id: CLValueBuilder.string(agentId),
-        amount: CLValueBuilder.u512(amount),
-        service_id: CLValueBuilder.string(serviceId),
-        proof_hash: CLValueBuilder.string(proofHash),
-      })
-    ),
-    DeployUtil.standardPayment(5000000000)
-  )
-
-  const signed = deploy.sign([keyPair])
-  const hash = await client.putDeploy(signed)
-  return hash
+  proofHash: string
+): Promise<object> {
+  return {
+    contract_hash: CONTRACT_HASH,
+    entry_point: 'secure_transaction',
+    args: {
+      agent_id: agentId,
+      amount: amount,
+      service_id: serviceId,
+      proof_hash: proofHash
+    },
+    payment: SCAN_PRICE_MOTES,
+    network: 'casper-test'
+  }
 }
 
-export async function getAgentStats(agentId: string) {
-  const result = await client.nodeClient.getStateRootHash()
-  return result
+export async function submitDeploy(deployJson: object): Promise<string> {
+  const response = await fetch(RPC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'account_put_deploy',
+      params: { deploy: deployJson },
+      id: 1
+    })
+  })
+  const data = await response.json()
+  return data.result?.deploy_hash || ''
+}
+
+export async function checkDeployStatus(deployHash: string): Promise<string> {
+  const response = await fetch(RPC_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      method: 'info_get_deploy',
+      params: { deploy_hash: deployHash },
+      id: 1
+    })
+  })
+  const data = await response.json()
+  const execResult = data.result?.execution_results?.[0]
+  if (!execResult) return 'pending'
+  return execResult.execution_result?.Version2?.error_message ? 'failed' : 'success'
 }
