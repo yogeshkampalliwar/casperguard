@@ -3,7 +3,7 @@ const fetch = (...args) => import('node-fetch').then(({default: f}) => f(...args
 const cors = require('cors')
 
 const app = express()
-app.use(cors())
+app.use(cors({ origin: '*' }))
 app.use(express.json())
 
 app.get('/api/block', async (req, res) => {
