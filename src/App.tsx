@@ -90,6 +90,11 @@ export default function App() {
     }
     setStats({ approved, blocked, total: agents.length })
     addLog('Done: ' + approved + ' approved, ' + blocked + ' blocked')
+    setX402Payments([
+      { time: new Date().toLocaleTimeString(), amount: '0.001 ETH', agent: 'trading-bot-001' },
+      { time: new Date().toLocaleTimeString(), amount: '0.001 ETH', agent: 'rwa-oracle-003' },
+    ])
+    setTotalEarned(0.002)
     setAgentStatus('done')
   }
 
