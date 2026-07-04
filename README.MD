@@ -10,6 +10,7 @@ CasperGuard is an autonomous AI security agent that monitors and risk-scores AI-
 
 👉 [Watch on YouTube](https://youtube.com/shorts/hCfUkW8m-ZU)
 
+   [watch video] 2  for better understand  (https://youtube.com/shorts/JyOeau-qFvw?si=aA2Zwsod16YiOcxc)
 ## 🎯 Problem
 
 1. AI agents execute on-chain transactions with zero security — malicious agents can drain wallets
@@ -202,3 +203,16 @@ server: {
 
 ## Demo Video
 https://youtube.com/shorts/JyOeau-qFvw?si=aA2Zwsod16YiOcxc
+
+### Real Agent Output Example
+```
+Real Block Height: 8,388,570
+Real CSPR Price: $0.00200832
+Contract Status: DEPLOYED
+
+APPROVED: trading-bot-001 | 5 CSPR | LOW (score=0)
+BLOCKED: defi-agent-007 | 150 CSPR | HIGH (score=3) | High amount >100 CSPR
+APPROVED: rwa-oracle-003 | 2 CSPR | LOW (score=0)
+
+Summary: 2 approved, 1 blocked
+```
