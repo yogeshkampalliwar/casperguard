@@ -125,3 +125,6 @@ Twitter: https://twitter.com/yogeshr50283421
 
 ## License
 MIT
+
+## MCP Server
+- Endpoint: https://mcp.tendem.ai/mcp
