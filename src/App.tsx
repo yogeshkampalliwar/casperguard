@@ -18,6 +18,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('security')
   const [blockHeight, setBlockHeight] = useState<number>(0)
   const [csprPrice, setCsprPrice] = useState<number>(0)
+  const [mcpLogs, setMcpLogs] = useState<string[]>([])
+  const [mcpLoading, setMcpLoading] = useState(false)
   const [logs, setLogs] = useState<string[]>(['CasperGuard initialized...'])
   const [stats, setStats] = useState({ approved: 0, blocked: 0, total: 0 })
   const [x402Payments, setX402Payments] = useState<{time: string, amount: string, agent: string}[]>([])
