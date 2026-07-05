@@ -48,11 +48,15 @@ APPROVED: rwa-oracle-003 | 2 CSPR | LOW RISK (score=0)
 Summary: 2 approved, 1 blocked
 
 ## X402 Payment Output
-Live Block: 8,392,853
+Live Block: 8,406,151
 APPROVED: trading-bot-001 | 5 CSPR | score=0
-BLOCKED: defi-agent-007 | 150 CSPR | score=3
+BLOCKED: defi-agent-007 | 150 CSPR | score=3 | Refund: 0.1 CSPR
 APPROVED: rwa-oracle-003 | 2 CSPR | score=0
-Total X402 Fees Paid: 0.300 CSPR
+APPROVED: nft-agent-002 | 25 CSPR | score=1
+APPROVED: dao-voter-001 | 8 CSPR | score=0
+Fees Collected: 0.500 CSPR
+Refunds: 0.100 CSPR
+Net Revenue: 0.400 CSPR
 
 ## Run Commands
 
