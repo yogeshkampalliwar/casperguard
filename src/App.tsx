@@ -251,18 +251,18 @@ export default function App() {
     const add = (msg: string) => setMcpLogs(prev => [...prev, msg])
     try {
       add('🔌 Connecting to CasperGuard MCP Server...')
-      const res = await fetch('https://mcp.tendem.ai/mcp')
+      const res = await fetch('/api/mcp')
       const data = await res.json()
       add('✅ ' + data.name + ' v' + data.version)
       add('📋 Tools: ' + data.tools.map((t: any) => t.name).join(', '))
-      const r1 = await fetch('https://mcp.tendem.ai/mcp', {
+      const r1 = await fetch('/api/mcp', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ method: 'tools/call', params: { name: 'get_block_height', arguments: {} } })
       })
       const d1 = await r1.json()
       const p1 = JSON.parse(d1.content[0].text)
       add('⛓️ Block: ' + p1.block_height.toLocaleString())
-      const r2 = await fetch('https://mcp.tendem.ai/mcp', {
+      const r2 = await fetch('/api/mcp', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ method: 'tools/call', params: { name: 'scan_agent', arguments: { agent_id: 'defi-agent-007', amount: 150, service_id: 'swap' } } })
       })
