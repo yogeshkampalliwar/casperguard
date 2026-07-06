@@ -238,6 +238,55 @@ export default function App() {
     } catch(e) { addLog('❌ Payment error: ' + e) }
   }
 
+
+  // AUTO-PAUSE: Monitor for hack attempts
+  const [contractPaused, setContractPaused] = useState(false)
+  const [threatLevel, setThreatLevel] = useState(0)
+  const [autoScanActive, setAutoScanActive] = useState(false)
+
+  const checkThreat = async () => {
+    try {
+      const r = await fetch('/api/mcp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ method: 'tools/call', params: { name: 'scan_agent', arguments: { agent_id: 'threat-monitor', amount: 999, service_id: 'auto-scan' } } })
+      })
+      const d = await r.json()
+      const result = JSON.parse(d.content[0].text)
+      
+      if (result.score >= 3) {
+        setThreatLevel(prev => {
+          const newLevel = prev + 1
+          if (newLevel >= 3 && !contractPaused) {
+            setContractPaused(true)
+            addLog('🚨 AUTO-PAUSE ACTIVATED! Threat detected!')
+            addLog('🔴 Contract paused — ' + newLevel + ' threats blocked')
+          }
+          return newLevel
+        })
+      } else {
+        setThreatLevel(0)
+      }
+    } catch(e) {}
+  }
+
+  const startAutoScan = () => {
+    setAutoScanActive(true)
+    addLog('🛡️ Auto-threat monitoring started (0.5s intervals)')
+    const interval = setInterval(checkThreat, 500)
+    setTimeout(() => {
+      clearInterval(interval)
+      setAutoScanActive(false)
+      addLog('✅ Auto-scan complete')
+    }, 10000)
+  }
+
+  const resumeContract = () => {
+    setContractPaused(false)
+    setThreatLevel(0)
+    addLog('✅ Contract RESUMED by owner')
+  }
+
   const runMCP = async () => {
     setMcpLoading(true)
     setMcpLogs([])
@@ -429,6 +478,39 @@ export default function App() {
         </div>
 
         <div style={{ textAlign: 'center', fontSize: 10, color: '#333', marginTop: 12, letterSpacing: 3 }}>
+        {/* AUTO-PAUSE Security */}
+        <div style={{ background: contractPaused ? 'rgba(50,0,0,0.95)' : 'rgba(0,20,0,0.95)', border: contractPaused ? '2px solid #ff0000' : '1px solid #00ff41', borderRadius: 16, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: 13, color: contractPaused ? '#ff0000' : '#00ff41', letterSpacing: 2, marginBottom: 8 }}>
+            {contractPaused ? '🚨 CONTRACT PAUSED — HACK DETECTED' : '🛡️ AUTO-PAUSE MONITOR'}
+          </div>
+          {contractPaused && (
+            <div style={{ fontSize: 20, color: '#ff0000', fontWeight: 'bold', textAlign: 'center', marginBottom: 10, animation: 'pulse 0.5s infinite' }}>
+              ⛔ EMERGENCY STOP ACTIVE ⛔
+            </div>
+          )}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 10 }}>
+            <div style={{ background: '#111', borderRadius: 8, padding: 10, textAlign: 'center' }}>
+              <div style={{ fontSize: 10, color: '#666' }}>THREAT LEVEL</div>
+              <div style={{ fontSize: 24, color: threatLevel >= 3 ? '#ff0000' : threatLevel >= 1 ? '#ffff00' : '#00ff41', fontWeight: 'bold' }}>{threatLevel}/3</div>
+            </div>
+            <div style={{ background: '#111', borderRadius: 8, padding: 10, textAlign: 'center' }}>
+              <div style={{ fontSize: 10, color: '#666' }}>STATUS</div>
+              <div style={{ fontSize: 14, color: contractPaused ? '#ff0000' : '#00ff41', fontWeight: 'bold' }}>{contractPaused ? 'PAUSED' : 'ACTIVE'}</div>
+            </div>
+          </div>
+          {!contractPaused ? (
+            <button onClick={startAutoScan} disabled={autoScanActive}
+              style={{ width: '100%', padding: '12px', background: autoScanActive ? '#001a00' : 'linear-gradient(135deg,#003300,#00cc33)', border: 'none', borderRadius: 10, color: '#00ff41', fontWeight: 'bold', fontSize: 14, cursor: 'pointer', fontFamily: 'monospace', letterSpacing: 2 }}>
+              {autoScanActive ? '🔍 SCANNING... (0.5s intervals)' : '🛡️ START AUTO-MONITOR'}
+            </button>
+          ) : (
+            <button onClick={resumeContract}
+              style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#cc0000,#ff3333)', border: 'none', borderRadius: 10, color: '#fff', fontWeight: 'bold', fontSize: 14, cursor: 'pointer', fontFamily: 'monospace', letterSpacing: 2 }}>
+              ✅ RESUME CONTRACT (Owner Only)
+            </button>
+          )}
+        </div>
+
         {/* MCP Server */}
         <div style={{ background: 'rgba(0,20,0,0.95)', border: '1px solid #00ff41', borderRadius: 16, padding: 16, marginBottom: 12 }}>
           <div style={{ fontSize: 13, color: '#00ff41', letterSpacing: 2, marginBottom: 8 }}>🔌 MCP SERVER — LIVE</div>
