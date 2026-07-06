@@ -18,6 +18,8 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('security')
   const [blockHeight, setBlockHeight] = useState<number>(0)
   const [csprPrice, setCsprPrice] = useState<number>(0)
+  const [casperWallet, setCasperWallet] = useState<string>('')
+  const [paymentTx, setPaymentTx] = useState<string>('')
   const [mcpLogs, setMcpLogs] = useState<string[]>([])
   const [mcpLoading, setMcpLoading] = useState(false)
   const [logs, setLogs] = useState<string[]>(['CasperGuard initialized...'])
@@ -166,6 +168,82 @@ export default function App() {
     { id: 'gitpaid' as Tab, label: 'GitPaid', icon: '💰' },
   ]
 
+
+  const connectCasperWallet = async () => {
+    try {
+      const CasperWalletProvider = (window as any).CasperWalletProvider
+      if (!CasperWalletProvider) {
+        alert('Install Casper Wallet extension!')
+        return
+      }
+      const provider = CasperWalletProvider()
+      await provider.requestConnection()
+      const pubKey = await provider.getActivePublicKey()
+      setCasperWallet(pubKey)
+      addLog('✅ Casper Wallet connected: ' + pubKey.slice(0, 20) + '...')
+    } catch(e) { addLog('❌ Wallet error: ' + e) }
+  }
+
+  const x402RealPay = async (agentId: string, amount: number, serviceId: string) => {
+    try {
+      addLog('⚡ X402 Real Payment Starting...')
+      
+      // Step 1: Call /api/scan - get HTTP 402
+      const r1 = await fetch('/api/scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agent_id: agentId, amount, service_id: serviceId })
+      })
+      
+      if (r1.status === 402) {
+        const payInfo = await r1.json()
+        addLog('← HTTP 402 Payment Required')
+        addLog('  Price: ' + payInfo.x402.price + ' motes (0.1 CSPR)')
+        
+        // Step 2: Sign with Casper Wallet
+        const CasperWalletProvider = (window as any).CasperWalletProvider
+        const provider = CasperWalletProvider()
+        
+        const deployJson = {
+          deploy: {
+            hash: '',
+            header: {
+              account: casperWallet,
+              timestamp: new Date().toISOString(),
+              ttl: '30m',
+              gas_price: 1,
+              body_hash: '',
+              dependencies: [],
+              chain_name: 'casper-test'
+            },
+            payment: { ModuleBytes: { module_bytes: '', args: [['amount', { cl_type: 'U512', bytes: '', parsed: '100000000' }]] } },
+            session: { Transfer: { args: [['amount', { cl_type: 'U512', bytes: '', parsed: '100000000' }], ['target', { cl_type: 'PublicKey', bytes: payInfo.x402.contract, parsed: payInfo.x402.contract }]] } },
+            approvals: []
+          }
+        }
+        
+        const signResult = await provider.sign(JSON.stringify(deployJson), casperWallet)
+        addLog('✅ Signed! TX: ' + signResult.signature.slice(0, 20) + '...')
+        
+        // Step 3: Send with payment proof
+        const r2 = await fetch('/api/scan', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Payment-Tx': signResult.signature,
+            'X-Payment-Signature': signResult.signature
+          },
+          body: JSON.stringify({ agent_id: agentId, amount, service_id: serviceId })
+        })
+        
+        const result = await r2.json()
+        setPaymentTx(signResult.signature)
+        addLog('✅ Payment settled on-chain!')
+        addLog(result.result + ': ' + agentId + ' | score=' + result.score)
+        if (result.refunded) addLog('💰 Refund: 0.1 CSPR returned!')
+      }
+    } catch(e) { addLog('❌ Payment error: ' + e) }
+  }
 
   const runMCP = async () => {
     setMcpLoading(true)
