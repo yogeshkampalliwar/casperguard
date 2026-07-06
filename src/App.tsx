@@ -293,6 +293,8 @@ export default function App() {
     const add = (msg: string) => setMcpLogs(prev => [...prev, msg])
     try {
       add('🔌 Connecting to CasperGuard MCP Server...')
+      add('📡 CSPR.trade MCP: mcp.cspr.trade/mcp')
+      add('🛠️ Tools: scan_agent, swap_quote, get_price, get_block')
       const res = await fetch('/api/mcp')
       const data = await res.json()
       add('✅ ' + data.name + ' v' + data.version)
