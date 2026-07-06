@@ -166,6 +166,36 @@ export default function App() {
     { id: 'gitpaid' as Tab, label: 'GitPaid', icon: '💰' },
   ]
 
+
+  const runMCP = async () => {
+    setMcpLoading(true)
+    setMcpLogs([])
+    const add = (msg: string) => setMcpLogs(prev => [...prev, msg])
+    try {
+      add('🔌 Connecting to CasperGuard MCP Server...')
+      const res = await fetch('https://mcp.tendem.ai/mcp')
+      const data = await res.json()
+      add('✅ ' + data.name + ' v' + data.version)
+      add('📋 Tools: ' + data.tools.map((t: any) => t.name).join(', '))
+      const r1 = await fetch('https://mcp.tendem.ai/mcp', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ method: 'tools/call', params: { name: 'get_block_height', arguments: {} } })
+      })
+      const d1 = await r1.json()
+      const p1 = JSON.parse(d1.content[0].text)
+      add('⛓️ Block: ' + p1.block_height.toLocaleString())
+      const r2 = await fetch('https://mcp.tendem.ai/mcp', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ method: 'tools/call', params: { name: 'scan_agent', arguments: { agent_id: 'defi-agent-007', amount: 150, service_id: 'swap' } } })
+      })
+      const d2 = await r2.json()
+      const p2 = JSON.parse(d2.content[0].text)
+      add('🔴 ' + p2.agent_id + ': ' + p2.result + ' score=' + p2.score)
+      add('✅ MCP working!')
+    } catch(e) { add('❌ Error: ' + e) }
+    setMcpLoading(false)
+  }
+
   return (
     <div style={{ fontFamily: "'Courier New', monospace", width: '100%', minHeight: '100vh', background: '#0B0E11', color: '#fff' }}>
       <div style={{ maxWidth: 700, margin: '0 auto', padding: '28px 18px', boxSizing: 'border-box' as const }}>
@@ -312,6 +342,22 @@ export default function App() {
         </div>
 
         <div style={{ textAlign: 'center', fontSize: 10, color: '#333', marginTop: 12, letterSpacing: 3 }}>
+        {/* MCP Server */}
+        <div style={{ background: 'rgba(0,20,0,0.95)', border: '1px solid #00ff41', borderRadius: 16, padding: 16, marginBottom: 12 }}>
+          <div style={{ fontSize: 13, color: '#00ff41', letterSpacing: 2, marginBottom: 8 }}>🔌 MCP SERVER — LIVE</div>
+          <button onClick={runMCP} disabled={mcpLoading}
+            style={{ width: '100%', padding: '14px', background: mcpLoading ? '#001a00' : 'linear-gradient(135deg,#003300,#00cc33)', border: 'none', borderRadius: 12, color: '#00ff41', fontWeight: 'bold', fontSize: 15, cursor: 'pointer', fontFamily: 'monospace', letterSpacing: 2, marginBottom: 10 }}>
+            {mcpLoading ? '🔌 CONNECTING...' : '🔌 RUN MCP AGENT'}
+          </button>
+          {mcpLogs.length > 0 && (
+            <div style={{ background: '#000', borderRadius: 10, padding: 12 }}>
+              {mcpLogs.map((l, i) => (
+                <div key={i} style={{ fontSize: 13, color: '#00ff41', fontFamily: 'monospace', lineHeight: 1.8 }}>{l}</div>
+              ))}
+            </div>
+          )}
+        </div>
+
           CASPERGUARD + GITPAID • CASPER & BASE NETWORK 2026
         </div>
       </div>
