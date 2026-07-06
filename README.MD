@@ -154,3 +154,18 @@ Project: CasperGuard — AI Agent Security Layer
 ## Deployed Contracts
 - Casper Testnet: hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
 - Base Sepolia (GitPaid): 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
+
+## 🎯 Vision
+
+CasperGuard solves the most critical gap in the agentic AI economy — **zero security layer for autonomous on-chain transactions.**
+
+As AI agents multiply on Casper Network, a single compromised agent can drain protocol funds in seconds. CasperGuard is the **first real-time AI risk scoring layer** built natively on Casper with:
+
+- **Auto-Pause** — Emergency stop when threat level reaches 3/3
+- **GitPaid** — ETH bounty system for open source developers (Base Sepolia)
+- **x402 Micropayments** — 0.001 ETH per security scan, sustainable revenue model
+- **MCP Server** — Live blockchain access for AI agents
+
+**Target:** Monitor 1000+ AI agents daily by Q4 2026. CasperGuard becomes the standard security middleware for every dApp on Casper Network.
+
+**Revenue Model:** Every agent scan = 0.001 ETH fee → sustainable on-chain business from day one.
