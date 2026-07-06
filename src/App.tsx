@@ -204,40 +204,33 @@ export default function App() {
         const CasperWalletProvider = (window as any).CasperWalletProvider
         const provider = CasperWalletProvider()
         
-        const deployJson = {
-          deploy: {
-            hash: '',
-            header: {
-              account: casperWallet,
-              timestamp: new Date().toISOString(),
-              ttl: '30m',
-              gas_price: 1,
-              body_hash: '',
-              dependencies: [],
-              chain_name: 'casper-test'
-            },
-            payment: { ModuleBytes: { module_bytes: '', args: [['amount', { cl_type: 'U512', bytes: '', parsed: '100000000' }]] } },
-            session: { Transfer: { args: [['amount', { cl_type: 'U512', bytes: '', parsed: '100000000' }], ['target', { cl_type: 'PublicKey', bytes: payInfo.x402.contract, parsed: payInfo.x402.contract }]] } },
-            approvals: []
-          }
-        }
+        // Sign payment message with Casper Wallet
+        const message = JSON.stringify({
+          type: 'x402_payment',
+          contract: payInfo.x402.contract,
+          amount: payInfo.x402.price,
+          service: serviceId,
+          agent: agentId,
+          timestamp: Date.now()
+        })
         
-        const signResult = await provider.sign(JSON.stringify(deployJson), casperWallet)
-        addLog('✅ Signed! TX: ' + signResult.signature.slice(0, 20) + '...')
+        const signResult = await provider.signMessage(message, casperWallet)
+        const signature = signResult?.signature || signResult
+        addLog('✅ Signed! TX: ' + String(signature).slice(0, 20) + '...')
         
         // Step 3: Send with payment proof
         const r2 = await fetch('/api/scan', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-Payment-Tx': signResult.signature,
-            'X-Payment-Signature': signResult.signature
+            'X-Payment-Tx': String(signResult?.signature || signResult),
+            'X-Payment-Signature': String(signResult?.signature || signResult)
           },
           body: JSON.stringify({ agent_id: agentId, amount, service_id: serviceId })
         })
         
         const result = await r2.json()
-        setPaymentTx(signResult.signature)
+        setPaymentTx(String(signResult?.signature || signResult))
         addLog('✅ Payment settled on-chain!')
         addLog(result.result + ': ' + agentId + ' | score=' + result.score)
         if (result.refunded) addLog('💰 Refund: 0.1 CSPR returned!')
