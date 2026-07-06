@@ -128,3 +128,29 @@ MIT
 
 ## MCP Server
 - Endpoint: https://mcp.tendem.ai/mcp
+
+## MCP Tools Available
+- get_block_height — Live Casper block
+- get_cspr_price — Real CSPR price
+- scan_agent — AI risk scoring
+- get_contract_state — Contract status
+
+## X402 Micropayment Flow
+1. Agent requests scan service
+2. HTTP 402 received with price
+3. Agent signs CSPR authorization
+4. Payment settled on Casper Testnet
+5. Service response delivered
+
+## Casper Wallet Integration
+- Real wallet connect via Casper Wallet browser extension
+- Live balance fetch from Casper Testnet
+- Real x402 payment signing
+
+## CSPR.fans Voting
+Vote for CasperGuard on CSPR.fans app!
+Project: CasperGuard — AI Agent Security Layer
+
+## Deployed Contracts
+- Casper Testnet: hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
+- Base Sepolia (GitPaid): 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
