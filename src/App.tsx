@@ -332,6 +332,22 @@ export default function App() {
               {agentStatus === 'running' ? 'SCANNING...' : 'RUN AI AGENT'}
             </button>
             <div style={card}>
+              <div style={{ fontSize: 12, color: '#00aaff', letterSpacing: 2, marginBottom: 8 }}>🔗 CASPER WALLET</div>
+              {!casperWallet ? (
+                <button onClick={connectCasperWallet}
+                  style={{ width: '100%', padding: '14px', background: 'linear-gradient(135deg,#0044ff,#00aaff)', border: 'none', borderRadius: 12, color: '#fff', fontWeight: 'bold', fontSize: 15, cursor: 'pointer', fontFamily: 'monospace', letterSpacing: 2, marginBottom: 10 }}>
+                  🔗 CONNECT CASPER WALLET
+                </button>
+              ) : (
+                <div style={{ marginBottom: 10 }}>
+                  <div style={{ fontSize: 11, color: '#00ff41', marginBottom: 8 }}>✅ {casperWallet.slice(0,20)}...</div>
+                  <button onClick={() => x402RealPay('defi-agent-007', 150, 'swap')}
+                    style={{ width: '100%', padding: '12px', background: 'linear-gradient(135deg,#ff6600,#ff9900)', border: 'none', borderRadius: 10, color: '#fff', fontWeight: 'bold', fontSize: 14, cursor: 'pointer', fontFamily: 'monospace', letterSpacing: 2 }}>
+                    ⚡ PAY & SCAN (0.1 CSPR)
+                  </button>
+                  {paymentTx && <div style={{ fontSize: 11, color: '#00ff41', marginTop: 8, wordBreak: 'break-all' }}>TX: {paymentTx.slice(0,30)}...</div>}
+                </div>
+              )}
               <div style={{ fontSize: 12, color: '#fff', letterSpacing: 2, marginBottom: 10 }}>AGENT FEED - LIVE</div>
               {logs.map((l, i) => (
                 <div key={i} style={{ fontSize: 12, lineHeight: 2, color: '#00ff41', borderLeft: i === 0 ? '2px solid #ff3333' : '2px solid #1a0000', paddingLeft: 8, marginBottom: 4 }}>{l}</div>
