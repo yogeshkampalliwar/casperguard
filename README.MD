@@ -1,5 +1,13 @@
 # 🛡️ CasperGuard — AI Agent Security Layer
 
+## 🎬 Demo Videos
+
+- https://youtube.com/shorts/hCfUkW8m-ZU
+- https://youtube.com/shorts/JyOeau-qFvw
+- https://youtube.com/shorts/ic_Zhp3o_XI
+
+---
+
 ## 💡 Inspiration
 
 Every day, AI agents execute thousands of autonomous transactions on blockchain networks with **zero security review**. A single compromised agent can drain an entire protocol in seconds — no human sees it coming, no system stops it.
