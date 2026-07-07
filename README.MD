@@ -67,6 +67,97 @@ CasperGuard is an autonomous AI security agent that **monitors, scores, and cont
 
 ---
 
+
+## 🚀 Run Commands
+
+### Frontend
+```bash
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard
+npm install
+node server.cjs &
+npm run dev -- --host
+```
+
+### Real AI Agent
+```bash
+cd worker
+pip install requests
+python real_agent.py
+```
+
+### x402 Micropayment Agent
+```bash
+cd worker
+python x402_payment.py
+```
+
+### Smart Contract
+```bash
+cd contract
+cargo odra build
+```
+
+### Termux (Android Mobile)
+```bash
+pkg update && pkg install nodejs python git
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard
+npm install
+node server.cjs &
+npm run dev -- --host
+```
+
+---
+
+## 🤖 How Agents Work
+
+### AI Security Agent Flow
+```
+Agent Transaction Request
+        ↓
+CasperGuard Risk Scorer
+        ↓
+Amount > 100 CSPR? → HIGH RISK → BLOCKED 🔴
+Amount > 10 CSPR?  → MEDIUM RISK → WARNING 🟡
+Amount <= 10 CSPR? → LOW RISK → APPROVED ✅
+        ↓
+Auto-Pause if threats >= threshold 🚨
+        ↓
+On-chain record on Casper Testnet
+```
+
+### x402 Micropayment Flow
+```
+1. Agent requests scan service
+2. Server returns HTTP 402 Payment Required
+3. Agent signs EIP-712 authorization with Casper Wallet
+4. 0.1 CSPR payment settled on Casper Testnet
+5. Risk scan result returned to agent
+6. Fees collected: 0.1 CSPR per scan
+```
+
+### MCP Server Flow
+```
+1. AI Agent connects to MCP endpoint
+2. Available tools:
+   - get_block_height → Live Casper block
+   - get_cspr_price   → Real CSPR price
+   - scan_agent       → AI risk scoring
+   - get_contract_state → Contract status
+3. Agent queries tool
+4. Real data returned from Casper Testnet
+```
+
+### GitPaid Flow
+```
+1. Project owner creates ETH bounty on GitHub issue
+2. Developer solves issue and submits PR
+3. Owner calls payDeveloper() on smart contract
+4. ETH transferred instantly — no middleman
+5. Contract: 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
+```
+
 ## 🧪 Testing — 218 Unit Tests
 
 ```bash
