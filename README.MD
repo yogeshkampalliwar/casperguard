@@ -155,6 +155,20 @@ Project: CasperGuard — AI Agent Security Layer
 - Casper Testnet: hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
 - Base Sepolia (GitPaid): 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
 
+
+## ✅ Testing — 218 Unit Tests (All Passing)
+
+Run tests:
+```bash
+node tests/casperguard.test.cjs
+```
+
+Results: 218 passed, 0 failed
+- 80 HIGH RISK boundary tests
+- 80 LOW RISK boundary tests
+- 50 MEDIUM RISK tests
+- 8 edge case tests
+
 ## 🎯 Vision
 
 CasperGuard solves the most critical gap in the agentic AI economy — **zero security layer for autonomous on-chain transactions.**
