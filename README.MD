@@ -268,3 +268,12 @@ The hardest part of AI agent security is not detecting threats — it is making 
 ## 📄 License
 
 MIT
+
+## Worker Files
+
+| File | Purpose |
+|------|---------|
+| real_agent.py | Real Casper RPC AI risk scoring agent |
+| x402_real.py | EIP-712 signing + HTTP 402 protocol flow |
+| x402_payment.py | Rate limiting + payment history tracking |
+| mcp_server.py | MCP HTTP server with 4 live tools |
