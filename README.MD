@@ -158,6 +158,16 @@ On-chain record on Casper Testnet
 5. Contract: 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
 ```
 
+
+## ⚡ Real x402 Testnet Transactions
+
+| Agent | Amount | Status | TX |
+|-------|--------|--------|----|
+| trading-bot-001 | 5 CSPR | ✅ APPROVED | [4d873763...](https://testnet.cspr.live/transaction/4d873763811de8020ecc7a38c11a3aa1b5189e777d0b16b2c0b5b137e5092e29) |
+| defi-agent-007 | 150 CSPR | 🔴 BLOCKED | [f4ffe7d9...](https://testnet.cspr.live/transaction/f4ffe7d98e31562b9edc11f8fcb26820efef4ac88a5bf3ee08e35b3829def4e0) |
+| rwa-oracle-003 | 2 CSPR | ✅ APPROVED | [3eab2911...](https://testnet.cspr.live/transaction/3eab291133419d98d4f3c39cbc551746030cf81c2573197958ebc1548df840db) |
+
+Block: 8,446,877 | Wallet Balance: 3,224 CSPR
 ## 🧪 Testing — 218 Unit Tests
 
 ```bash
