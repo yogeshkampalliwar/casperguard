@@ -7,8 +7,9 @@ import random
 import time
 
 KEY_PATH = "/workspaces/casperguard/contract/keys/secret_key.pem"
+RECIPIENT = "017d96b9a63abcb61c870a4f55187a0a7ac24096bdb5fc585c12a686a4d892009e"
 RPC = "https://node.testnet.casper.network/rpc"
-SCAN_PRICE_MOTES = 100000000  # 0.1 CSPR
+SCAN_PRICE_MOTES = 2500000000  # 2.5 CSPR minimum
 
 def get_block_height():
     r = requests.post(RPC, json={"jsonrpc":"2.0","method":"chain_get_block","params":{},"id":1})
@@ -47,12 +48,12 @@ def x402_real_scan(agent_id, amount, service_id):
     )
 
     # target must be bytes — use account_key bytes directly
-    target_pub_key = cp1.to_public_key()
+    target_pub_key = pycspr.types.cl.CLV_PublicKey(pycspr.KeyAlgorithm.SECP256K1, bytes.fromhex(RECIPIENT))
 
     deploy = pycspr.create_transfer(
         params=deploy_params,
         amount=SCAN_PRICE_MOTES,
-        target=target_pub_key.account_key,
+        target=bytes.fromhex(RECIPIENT),
         correlation_id=random.randint(1, 1000000)
     )
 
@@ -61,10 +62,21 @@ def x402_real_scan(agent_id, amount, service_id):
     print(f"   [3] ← Signed! Hash: {deploy_hash[:20]}...")
 
     print(f"   [4] → Submitting to Casper testnet...")
-    client = NodeRpcClient(NodeRpcConnectionInfo(host="node.testnet.casper.network", port=7777))
-    result = client.send_deploy(deploy)
+    import json
+    import dataclasses
+    deploy_dict = pycspr.to_json(deploy)
+    r = requests.post(
+        "https://node.testnet.casper.network/rpc",
+        json={"jsonrpc":"2.0","method":"account_put_deploy","params":{"deploy": deploy_dict},"id":1},
+        headers={"Content-Type":"application/json"},
+        timeout=30
+    )
+    resp = r.json()
+    if "error" in resp:
+        print(f"   ❌ Error: {resp['error']}")
+    result = resp
     print(f"   [4] ← Submitted! ✅")
-    print(f"   🔗 https://testnet.cspr.live/deploy/{deploy_hash}")
+    print(f"   🔗 https://testnet.cspr.live/transaction/{deploy_hash}")
 
     score = 0
     reasons = []
