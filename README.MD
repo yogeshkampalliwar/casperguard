@@ -292,3 +292,25 @@ MIT
 ## Real On-Chain Transactions
 - Deploy: `3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9`
 - Explorer: https://testnet.cspr.live/deploy/3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9
+
+## Real On-Chain Transactions — Casper Testnet
+
+| Agent | Result | Deploy Hash |
+|-------|--------|-------------|
+| trading-bot-001 | ✅ APPROVED | [d0280339...](https://testnet.cspr.live/transaction/d0280339ef34ba5d339c72479d95f33daae0bcd9a6b2bd12823abeeea9f45da8) |
+| defi-agent-007 | 🔴 BLOCKED | [54783ee7...](https://testnet.cspr.live/transaction/54783ee766cee754bd3376f43bd12820bb4ff440cd74500a0be0509e5ff555c9) |
+| rwa-oracle-003 | ✅ APPROVED | [4e43c334...](https://testnet.cspr.live/transaction/4e43c334f60fb801317dde3c003a3daa9aaa64007603ab9754a230276b254ed8) |
+
+Wallet: 02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada
+Balance: 2713.5995 CSPR
+
+## Real On-Chain Transactions — Casper Testnet
+
+| Agent | Result | Deploy Hash |
+|-------|--------|-------------|
+| trading-bot-001 | ✅ APPROVED | [d0280339...](https://testnet.cspr.live/transaction/d0280339ef34ba5d339c72479d95f33daae0bcd9a6b2bd12823abeeea9f45da8) |
+| defi-agent-007 | 🔴 BLOCKED | [54783ee7...](https://testnet.cspr.live/transaction/54783ee766cee754bd3376f43bd12820bb4ff440cd74500a0be0509e5ff555c9) |
+| rwa-oracle-003 | ✅ APPROVED | [4e43c334...](https://testnet.cspr.live/transaction/4e43c334f60fb801317dde3c003a3daa9aaa64007603ab9754a230276b254ed8) |
+
+Wallet: 02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada
+Balance: 2713.5995 CSPR
