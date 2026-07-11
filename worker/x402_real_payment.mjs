@@ -57,7 +57,7 @@ async function x402RealScan(agentId, amount, serviceId) {
 
   console.log(`   [4] → Submitting to Casper testnet...`);
   const result = await client.putTransaction(tx);
-  const txHash = result.transactionHash?.Version1 || result.transactionHash;
+  const txHash = JSON.stringify(result.transactionHash);
   console.log(`   [4] ← Submitted! ✅`);
   console.log(`   🔗 https://testnet.cspr.live/transaction/${txHash}`);
 
