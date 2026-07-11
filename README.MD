@@ -89,7 +89,7 @@ python real_agent.py
 ### x402 Micropayment Agent
 ```bash
 cd worker
-python x402_payment.py
+node x402_real_payment.mjs
 ```
 
 ### Smart Contract
