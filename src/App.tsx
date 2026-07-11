@@ -249,7 +249,7 @@ export default function App() {
       const r = await fetch('/api/mcp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ method: 'tools/call', params: { name: 'scan_agent', arguments: { agent_id: 'threat-monitor', amount: 999, service_id: 'auto-scan' } } })
+        body: JSON.stringify({ method: 'tools/call', params: { name: 'scan_agent', arguments: { agent_id: 'threat-monitor', amount: Math.floor(Math.random() * 200), service_id: 'auto-scan' } } })
       })
       const d = await r.json()
       const result = JSON.parse(d.content[0].text)
@@ -257,7 +257,7 @@ export default function App() {
       if (result.score >= 3) {
         setThreatLevel(prev => {
           const newLevel = prev + 1
-          if (newLevel >= 3 && !contractPaused) { setAutoScanActive(false);
+          if (newLevel >= 3 && !contractPaused) { setAutoScanActive(false); return;
             setContractPaused(true)
             addLog('🚨 AUTO-PAUSE ACTIVATED! Threat detected!')
             addLog('🔴 Contract paused — ' + newLevel + ' threats blocked')
