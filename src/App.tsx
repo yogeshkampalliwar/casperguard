@@ -257,7 +257,7 @@ export default function App() {
       if (result.score >= 3) {
         setThreatLevel(prev => {
           const newLevel = prev + 1
-          if (newLevel >= 3 && !contractPaused) {
+          if (newLevel >= 3 && !contractPaused) { clearInterval(interval); setAutoScanActive(false);
             setContractPaused(true)
             addLog('🚨 AUTO-PAUSE ACTIVATED! Threat detected!')
             addLog('🔴 Contract paused — ' + newLevel + ' threats blocked')
@@ -278,7 +278,7 @@ export default function App() {
       clearInterval(interval)
       setAutoScanActive(false)
       addLog('✅ Auto-scan complete')
-    }, 10000)
+    }, 5000)
   }
 
   const resumeContract = () => {
