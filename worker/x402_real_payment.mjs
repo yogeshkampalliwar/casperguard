@@ -46,7 +46,7 @@ async function x402RealScan(agentId, amount, serviceId) {
 
   const tx = await makeCsprTransferTransaction({
     senderPublicKeyHex: pubHex,
-    recipientPublicKeyHex: pubHex,
+    recipientPublicKeyHex: '0106ca7c39cd272dbf21a86eeb3b36b7c26e2e9b94af64292419f7862936bca2ec',
     transferAmount: SCAN_PRICE,
     chainName: 'casper-test',
     casperNetworkApiVersion: status.api_version || '2.0.0'
