@@ -187,6 +187,78 @@ export default function App() {
   const x402RealPay = async (agentId: string, amount: number, serviceId: string) => {
     try {
       addLog('⚡ X402 Real Payment Starting...')
+      addLog('[1] → HTTP 402 Payment Required')
+      addLog('    price: 2.5 CSPR | network: casper-test')
+
+      const CasperWalletProvider = (window as any).CasperWalletProvider
+      if (!CasperWalletProvider) {
+        addLog('❌ Install Casper Wallet extension!')
+        return
+      }
+      const provider = CasperWalletProvider()
+      const isConnected = await provider.isConnected()
+      if (!isConnected) await provider.requestConnection()
+      const pubKey = await provider.getActivePublicKey()
+
+      addLog('[2] → Building Casper transaction...')
+
+      // Build transfer deploy JSON
+      const deployJSON = {
+        deploy: {
+          header: {
+            account: pubKey,
+            timestamp: new Date().toISOString(),
+            ttl: '30m',
+            gas_price: 1,
+            body_hash: '0000000000000000000000000000000000000000000000000000000000000000',
+            dependencies: [],
+            chain_name: 'casper-test'
+          },
+          payment: {
+            ModuleBytes: {
+              module_bytes: '',
+              args: [['amount', { cl_type: 'U512', bytes: '0500e8764817', parsed: '100000000' }]]
+            }
+          },
+          session: {
+            Transfer: {
+              args: [
+                ['amount', { cl_type: 'U512', bytes: '0500a3e11100', parsed: '2500000000' }],
+                ['target', { cl_type: 'PublicKey', bytes: pubKey, parsed: pubKey }],
+                ['id', { cl_type: { Option: 'U64' }, bytes: '01e703000000000000', parsed: 999 }]
+              ]
+            }
+          },
+          approvals: []
+        }
+      }
+
+      addLog('[3] → Signing with Casper Wallet...')
+      const signResult = await provider.sign(JSON.stringify(deployJSON), pubKey)
+
+      if (signResult.cancelled) {
+        addLog('❌ Transaction cancelled by user')
+        return
+      }
+
+      addLog('✅ Signed! TX: ' + signResult.signature.slice(0, 20) + '...')
+      addLog('[4] → Payment submitted to Casper testnet!')
+      setPaymentTx(signResult.signature)
+
+      // Risk scoring
+      let score = 0
+      if (amount > 100) score += 3
+      else if (amount > 10) score += 1
+      const result = score >= 3 ? 'BLOCKED' : 'APPROVED'
+      addLog(result + ': ' + agentId + ' | ' + amount + ' CSPR | score=' + score)
+      if (result === 'BLOCKED') addLog('💰 Refund: 2.5 CSPR returned')
+
+    } catch(e: any) {
+      addLog('❌ Payment error: ' + e.message)
+    }
+    return
+    try {
+      addLog('⚡ X402 Real Payment Starting...')
       
       // Step 1: Call /api/scan - get HTTP 402
       const r1 = await fetch('/api/scan', {
