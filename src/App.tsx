@@ -220,7 +220,6 @@ export default function App() {
       }
 
       // Mobile Casper Wallet - use deep link
-      const isMobile = /Android|iPhone/i.test(navigator.userAgent)
       
       if (isMobile) {
         addLog('[2] → Opening Casper Wallet app...')
