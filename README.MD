@@ -325,3 +325,16 @@ Balance: 2713.5995 CSPR
 - 7 boundary tests ✅
 
 🛡️ 217 passed, 0 failed, 217 total
+
+## ⚡ Run Real x402 Payment (Node.js)
+
+```bash
+cd worker
+node x402_real_payment.mjs
+
+## ⚡ Run Real x402 Payment (Node.js JS SDK)
+```bash
+cd worker
+node x402_real_payment.mjs
+```
+Real output: 3 live Casper testnet transactions, 2 approved, 1 blocked.
