@@ -288,3 +288,7 @@ MIT
 | x402_payment.py | Rate limiting + payment history tracking |
 | x402_real_payment.py | will update real transection deploy hash every trasection 
 | mcp_server.py | MCP HTTP server with 4 live tools |
+
+## Real On-Chain Transactions
+- Deploy: `3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9`
+- Explorer: https://testnet.cspr.live/deploy/3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9
