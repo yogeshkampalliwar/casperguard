@@ -75,6 +75,48 @@ cargo odra build
 
 > ⚠️ Python removed — all agents now in Node.js for consistency and performance
 
+### x402 Payment Agent
+```bash
+node worker/x402_real_payment.mjs
+```
+
+### Share Publicly (Local Tunnel)
+```bash
+npx localtunnel --port 5173
+```
+
+### Share Publicly (ngrok)
+```bash
+npx ngrok http 5173
+```
+
+### Termux (Android Mobile)
+```bash
+pkg update && pkg install nodejs git
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard
+npm install
+node server.cjs &
+npm run dev -- --host
+```
+
+### Contract Build + Deploy (Rust + Odra)
+```bash
+cd contract
+cargo odra build
+cargo odra test
+cargo odra deploy --network casper-test
+```
+
+### Check Contract on Explorer
+```bash
+# Contract Package
+https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
+
+# Deploy TX
+https://testnet.cspr.live/transaction/3bb468313efb823a81d3350ab8f2024687c1d9218a4a41d86d8f3429e7af5bfb
+```
+
 
 ---
 
