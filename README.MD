@@ -265,3 +265,31 @@ Making AI agents pay for their own security via x402 creates the first self-sust
 ## 📄 License
 
 MIT
+
+---
+
+## 📊 Testnet Deployment & Transactions
+
+### Contract Package
+| Item | Value |
+|------|-------|
+| Network | Casper Testnet (casper-test) |
+| Contract Package Hash | `28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0` |
+| Explorer | [View Contract](https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0) |
+| Deployer Account | `02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada` |
+
+### Sample Testnet Transactions
+| # | Hash | Agent | Amount | Result |
+|---|------|-------|--------|--------|
+| 1 | [52c0c759...](https://testnet.cspr.live/transaction/52c0c759402d2d20920cce2891165dee8f74864581b5dce0578c293e7ada21f2) | trading-bot-001 | 5 CSPR | APPROVED |
+| 2 | [3452faa8...](https://testnet.cspr.live/transaction/3452faa8f7a5bdc376d0aa7c98c45f268f008b2ab5c6a181e5b1257957e03776) | defi-agent-007 | 150 CSPR | BLOCKED (HIGH risk) |
+| 3 | [d25a05d0...](https://testnet.cspr.live/transaction/d25a05d0280b4ca1a54842e5e4bf090bcb519c2d0457048e6382bceed99cea18) | rwa-oracle-003 | 2 CSPR | APPROVED |
+| 4 | [71b9c93e...](https://testnet.cspr.live/transaction/71b9c93e13558d2e5e13ce5c6ca9e8f635adb1f2a8dbdcca29054eb50d58bd50) | CSPR Transfer | - | Confirmed |
+
+### Step-by-Step Testing Instructions
+1. Visit [casperguard-bay.vercel.app](https://casperguard-bay.vercel.app)
+2. Connect Casper Wallet (testnet mode)
+3. Run AI Agent scan: `cd worker && node agent.mjs`
+4. Test x402 payments: `node x402_real_payment.mjs`
+5. Test MCP Server: `node mcp_client.mjs`
+6. View all transactions on [CSPR.live](https://testnet.cspr.live)
