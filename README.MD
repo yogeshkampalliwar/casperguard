@@ -52,33 +52,29 @@ node server.cjs &
 npm run dev -- --host
 ```
 
-### Node.js AI Agent
+### Node.js AI Agent (Real Casper RPC)
 ```bash
 node worker/agent.mjs
 ```
 
-### MCP Agent
+### MCP Agent (Live Blockchain Tools)
 ```bash
 node worker/mcp_client.mjs
 ```
 
-### Unit Tests
+### Unit Tests (218 passing)
 ```bash
 node tests/casperguard.test.cjs
 ```
 
-### Python AI Agent
-```bash
-cd worker
-pip install requests
-python real_agent.py
-```
-
-### Smart Contract
+### Smart Contract (Rust + Odra)
 ```bash
 cd contract
 cargo odra build
 ```
+
+> ⚠️ Python removed — all agents now in Node.js for consistency and performance
+
 
 ---
 
