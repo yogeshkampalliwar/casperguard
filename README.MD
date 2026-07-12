@@ -80,6 +80,35 @@ cargo odra build
 node worker/x402_real_payment.mjs
 ```
 
+### Local Tunnel (Public URL)
+```bash
+npx localtunnel --port 5173
+```
+
+### Termux Android
+```bash
+pkg update && pkg install nodejs git
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard && npm install
+node server.cjs & npm run dev -- --host
+```
+
+### Smart Contract Build
+```bash
+cd contract
+cargo odra build
+```
+
+### Smart Contract Deploy
+```bash
+cargo odra deploy --network casper-test
+```
+
+### x402 Payment Agent
+```bash
+node worker/x402_real_payment.mjs
+```
+
 ### Share Publicly (Local Tunnel)
 ```bash
 npx localtunnel --port 5173
