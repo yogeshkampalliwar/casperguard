@@ -33,7 +33,7 @@ CasperGuard was born — the first real-time AI security firewall built natively
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 19 + TypeScript + Vite |
-| AI Agent | Node.js + Python 3 + Casper RPC |
+| AI Agent | Node.js + Casper RPC |
 | Smart Contract | Rust + Odra Framework |
 | GitPaid | Solidity + Ethers.js v6 |
 | Blockchain | Casper Network Testnet |
