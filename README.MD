@@ -1,7 +1,6 @@
 # 🛡️ CasperGuard — AI Agent Security Layer
 
 ## 🎬 Demo Videos
-
 - https://youtube.com/shorts/hCfUkW8m-ZU
 - https://youtube.com/shorts/JyOeau-qFvw
 - https://youtube.com/shorts/ic_Zhp3o_XI
@@ -10,9 +9,9 @@
 
 ## 💡 Inspiration
 
-Every day, AI agents execute thousands of autonomous transactions on blockchain networks with **zero security review**. A single compromised agent can drain an entire protocol in seconds — no human sees it coming, no system stops it.
+Every day, AI agents execute thousands of autonomous transactions with zero security review. A single compromised agent can drain an entire protocol in seconds.
 
-We asked: *What if every AI agent transaction had a guardian?*
+We asked: What if every AI agent transaction had a guardian?
 
 CasperGuard was born — the first real-time AI security firewall built natively on Casper Network.
 
@@ -20,53 +19,27 @@ CasperGuard was born — the first real-time AI security firewall built natively
 
 ## 🤖 What It Does
 
-CasperGuard is an autonomous AI security agent that **monitors, scores, and controls** every AI agent transaction on Casper blockchain in real time.
-
-### 🛡️ AI Security Engine
-- Every agent transaction is evaluated by our risk scoring engine
-- **APPROVED** ✅ — low-risk transactions pass instantly
-- **BLOCKED** 🔴 — high-risk transactions stopped before execution
-- **AUTO-PAUSE** 🚨 — contract automatically pauses when threat level hits critical
-
-### ⚡ x402 Micropayments
-- Pay-per-scan model: agents pay 0.1 CSPR per security scan
-- Real HTTP 402 payment flow on Casper Testnet
-- EIP-712 signed authorization — no custodial wallet needed
-- Sustainable revenue: every scan generates protocol fees
-
-### 🤖 MCP Server (Model Context Protocol)
-- Live blockchain access for AI agents
-- Tools: get_block_height, get_cspr_price, scan_agent, get_contract_state
-- Agents can query CasperGuard directly via MCP protocol
-- Endpoint: mcp.cspr.trade/mcp compatible
-
-### 💰 GitPaid — Developer Bounty System
-- Project owners create ETH bounties on GitHub issues
-- Developers solve issues, get paid automatically via smart contract
-- No middleman — instant ETH transfer on Base Sepolia
-- Contract: 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
-
-### 🔗 Casper Wallet Integration
-- Real wallet connect via Casper Wallet browser extension
-- Live CSPR balance fetch from Casper Testnet
-- Real x402 payment signing — no simulation
+- 🛡️ AI Security — APPROVES low-risk, BLOCKS high-risk transactions
+- 🚨 AUTO-PAUSE — contract pauses when critical threat detected
+- ⚡ x402 Micropayments — agents pay 0.1 CSPR per scan
+- 🤖 MCP Server — live blockchain access for AI agents
+- 💰 GitPaid — ETH bounties for GitHub contributors
+- 🔗 Casper Wallet — real connect, real balance, real signing
 
 ---
 
-## 🔧 How We Built It
+## 🔧 Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| Frontend | React 19 + TypeScript + Vite | Real-time agent feed dashboard |
-| AI Agent | Python 3 + Casper RPC | Live risk scoring engine |
-| Smart Contract | Rust + Odra Framework | On-chain security enforcement |
-| GitPaid Contract | Solidity + Ethers.js v6 | Developer payment system |
-| Blockchain | Casper Network Testnet | Primary deployment chain |
-| Payments | x402 + EIP-712 | Micropayment protocol |
-| MCP | Model Context Protocol | AI agent blockchain access |
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19 + TypeScript + Vite |
+| AI Agent | Node.js + Python 3 + Casper RPC |
+| Smart Contract | Rust + Odra Framework |
+| GitPaid | Solidity + Ethers.js v6 |
+| Blockchain | Casper Network Testnet |
+| Payments | x402 + EIP-712 |
 
 ---
-
 
 ## 🚀 Run Commands
 
@@ -79,33 +52,32 @@ node server.cjs &
 npm run dev -- --host
 ```
 
-### Real AI Agent
+### Node.js AI Agent
+```bash
+node worker/agent.mjs
+```
+
+### MCP Agent
+```bash
+node worker/mcp_client.mjs
+```
+
+### Unit Tests
+```bash
+node tests/casperguard.test.cjs
+```
+
+### Python AI Agent
 ```bash
 cd worker
 pip install requests
 python real_agent.py
 ```
 
-### x402 Micropayment Agent
-```bash
-cd worker
-node x402_real_payment.mjs
-```
-
 ### Smart Contract
 ```bash
 cd contract
 cargo odra build
-```
-
-### Termux (Android Mobile)
-```bash
-pkg update && pkg install nodejs python git
-git clone https://github.com/yogeshkampalliwar/casperguard
-cd casperguard
-npm install
-node server.cjs &
-npm run dev -- --host
 ```
 
 ---
@@ -123,68 +95,27 @@ Amount > 10 CSPR?  → MEDIUM RISK → WARNING 🟡
 Amount <= 10 CSPR? → LOW RISK → APPROVED ✅
         ↓
 Auto-Pause if threats >= threshold 🚨
-        ↓
-On-chain record on Casper Testnet
 ```
 
 ### x402 Micropayment Flow
 ```
 1. Agent requests scan service
 2. Server returns HTTP 402 Payment Required
-3. Agent signs EIP-712 authorization with Casper Wallet
+3. Agent signs EIP-712 authorization
 4. 0.1 CSPR payment settled on Casper Testnet
-5. Risk scan result returned to agent
-6. Fees collected: 0.1 CSPR per scan
+5. Risk scan result returned
 ```
 
 ### MCP Server Flow
 ```
 1. AI Agent connects to MCP endpoint
-2. Available tools:
-   - get_block_height → Live Casper block
-   - get_cspr_price   → Real CSPR price
-   - scan_agent       → AI risk scoring
-   - get_contract_state → Contract status
-3. Agent queries tool
-4. Real data returned from Casper Testnet
+2. Tools: get_block_height, get_cspr_price, scan_agent, get_contract_state
+3. Real data returned from Casper Testnet
 ```
-
-### GitPaid Flow
-```
-1. Project owner creates ETH bounty on GitHub issue
-2. Developer solves issue and submits PR
-3. Owner calls payDeveloper() on smart contract
-4. ETH transferred instantly — no middleman
-5. Contract: 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809
-```
-
-
-## ⚡ Real x402 Testnet Transactions
-
-| Agent | Amount | Status | TX |
-|-------|--------|--------|----|
-| trading-bot-001 | 5 CSPR | ✅ APPROVED | [4d873763...](https://testnet.cspr.live/transaction/4d873763811de8020ecc7a38c11a3aa1b5189e777d0b16b2c0b5b137e5092e29) |
-| defi-agent-007 | 150 CSPR | 🔴 BLOCKED | [f4ffe7d9...](https://testnet.cspr.live/transaction/f4ffe7d98e31562b9edc11f8fcb26820efef4ac88a5bf3ee08e35b3829def4e0) |
-| rwa-oracle-003 | 2 CSPR | ✅ APPROVED | [3eab2911...](https://testnet.cspr.live/transaction/3eab291133419d98d4f3c39cbc551746030cf81c2573197958ebc1548df840db) |
-
-Block: 8,446,877 | Wallet Balance: 3,224 CSPR
-## 🧪 Testing — 218 Unit Tests
-
-```bash
-node tests/casperguard.test.cjs
-```
-
-✅ 218 passed | ❌ 0 failed
-- 80 HIGH RISK boundary tests
-- 80 LOW RISK boundary tests  
-- 50 MEDIUM RISK tests
-- 8 edge case tests
 
 ---
 
 ## 📜 On-Chain Proof (Casper Testnet)
-
-Every hash below is a real confirmed transaction — not simulated.
 
 | What | Hash |
 |------|------|
@@ -192,149 +123,77 @@ Every hash below is a real confirmed transaction — not simulated.
 | Deploy TX | 3bb468313efb823a81d3350ab8f2024687c1d9218a4a41d86d8f3429e7af5bfb |
 | GitPaid Contract | 0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809 (Base Sepolia) |
 
-🔗 [View Contract on Explorer](https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0)
+🔗 [View Contract](https://testnet.cspr.live/contract-package/28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0)
+
+## ⚡ Real x402 Transactions
+
+| Agent | Amount | Status | TX |
+|-------|--------|--------|----|
+| trading-bot-001 | 5 CSPR | ✅ APPROVED | [d0280339...](https://testnet.cspr.live/transaction/d0280339ef34ba5d339c72479d95f33daae0bcd9a6b2bd12823abeeea9f45da8) |
+| defi-agent-007 | 150 CSPR | 🔴 BLOCKED | [54783ee7...](https://testnet.cspr.live/transaction/54783ee766cee754bd3376f43bd12820bb4ff440cd74500a0be0509e5ff555c9) |
+| rwa-oracle-003 | 2 CSPR | ✅ APPROVED | [4e43c334...](https://testnet.cspr.live/transaction/4e43c334f60fb801317dde3c003a3daa9aaa64007603ab9754a230276b254ed8) |
+
+Wallet: 02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada
 
 ---
 
-## 🧪 Step-by-Step Testing Guide
+## 🧪 Testing — 218 Unit Tests
 
-1. 🌐 Open **https://casperguard-bay.vercel.app**
-2. 🤖 Click **RUN AI AGENT** — watch live risk scoring
-3. 🔗 Click **CONNECT CASPER WALLET** — real balance loads
-4. ⚡ Click **PAY & SCAN (0.1 CSPR)** — x402 micropayment executes
-5. 🔌 Click **RUN MCP AGENT** — MCP server responds with live block data
-6. 🚨 Watch **AUTO-PAUSE** — triggers when threat count hits critical
-7. 📊 View **AGENT FEED** — real-time block height + CSPR price
+```bash
+node tests/casperguard.test.cjs
+```
+
+✅ 218 passed | ❌ 0 failed
 
 ---
 
-## ⚡ Real Agent Output
+## 🧪 Step-by-Step Testing
 
-```
-Real Block Height: 8,411,343
-Real CSPR Price: $0.00194352
-Contract Status: DEPLOYED
-
-✅ APPROVED: trading-bot-001 | 5 CSPR | LOW RISK (score=0)
-🔴 BLOCKED:  defi-agent-007 | 150 CSPR | HIGH RISK (score=3)
-✅ APPROVED: rwa-oracle-003 | 2 CSPR | LOW RISK (score=0)
-
-X402 Fees Collected: 0.500 CSPR
-Refunds Issued: 0.100 CSPR
-Net Revenue: 0.400 CSPR
-Summary: 2 approved, 1 blocked
-```
+1. 🌐 Open https://casperguard-bay.vercel.app
+2. 🤖 Click RUN AI AGENT
+3. 🔗 Click CONNECT CASPER WALLET
+4. ⚡ Click PAY & SCAN (0.1 CSPR)
+5. 🔌 Click RUN MCP AGENT
+6. 🚨 Watch AUTO-PAUSE trigger
 
 ---
 
 ## 🚀 Challenges We Solved
 
-### 1. CORS Block on Casper RPC
-Browser blocked direct RPC calls. **Solution:** Built Vercel serverless function  that proxies to Casper node — real data, no CORS.
-
-### 2. x402 Has No JS SDK
-x402 reference is Go-only. **Solution:** Built custom JS x402 client with EIP-712 signing using casper-js-sdk — full 402 → sign → 200 round trip working.
-
-### 3. Real vs Simulation
-Most projects simulate transactions. **Solution:** CasperGuard uses real Casper Testnet RPC, real wallet signing, real on-chain contract — every action is verifiable on explorer.
-
-### 4. Auto-Pause Design
-How to stop runaway agents? **Solution:** Contract auto-pauses when blocked threat count hits threshold — owner can resume, full audit trail on-chain.
+1. CORS Block — Built Vercel serverless /api/block proxy
+2. x402 No JS SDK — Built custom EIP-712 client
+3. Auto-Pause Design — Threshold-based emergency stop
 
 ---
 
 ## 📚 What We Learned
 
-The hardest part of AI agent security is not detecting threats — it is making the system act fast enough to stop them. On-chain auto-pause with x402 revenue creates the first **self-sustaining AI security layer** — agents pay for their own protection.
+Making AI agents pay for their own security via x402 creates the first self-sustaining security layer on Casper Network.
 
 ---
 
-## 🗺️ What is Next
+## 🗺️ Roadmap
 
 | Month | Milestone |
 |-------|-----------|
-| 1 | Mainnet deployment + Halborn security audit |
-| 2 | ML-based risk engine — real pattern detection |
-| 3 | x402 SDK release for Casper ecosystem |
-| 4 | 5+ dApp integrations + partner program |
-| 5 | CasperGuard DAO — community governance |
-| 6 | 1000+ agents monitored daily, $50K+ TVL protected |
-
-**Revenue Model:** Every agent scan = 0.1 CSPR fee → sustainable on-chain business from day one.
-
-**Target:** Become the standard security middleware for every dApp on Casper Network by Q4 2026.
+| 1 | Mainnet deployment + Halborn audit |
+| 2 | ML-based risk engine |
+| 3 | x402 SDK release |
+| 4 | 5+ dApp integrations |
+| 5 | CasperGuard DAO |
+| 6 | 1000+ agents monitored daily |
 
 ---
 
 ## 👤 Builder
 
 **Yogesh Kampalliwar** — Solo Builder
-- 🐙 GitHub: [@yogeshkampalliwar](https://github.com/yogeshkampalliwar)
-- 🐦 Twitter: [@yogeshr50283421](https://twitter.com/yogeshr50283421)
-- 🌐 Live: https://casperguard-bay.vercel.app
+- GitHub: https://github.com/yogeshkampalliwar
+- Twitter: https://twitter.com/yogeshr50283421
+- Live: https://casperguard-bay.vercel.app
 
 ---
 
 ## 📄 License
 
 MIT
-
-## Worker Files
-
-| File | Purpose |
-|------|---------|
-| real_agent.py | Real Casper RPC AI risk scoring agent |
-| x402_real.py | EIP-712 signing + HTTP 402 protocol flow |
-| x402_payment.py | Rate limiting + payment history tracking |
-| x402_real_payment.py | will update real transection deploy hash every trasection 
-| mcp_server.py | MCP HTTP server with 4 live tools |
-
-## Real On-Chain Transactions
-- Deploy: `3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9`
-- Explorer: https://testnet.cspr.live/deploy/3433e6b16c9a43763eac2d2b18b0f9bfd8c05bce09545737f8afc5b817b7f9a9
-
-## Real On-Chain Transactions — Casper Testnet
-
-| Agent | Result | Deploy Hash |
-|-------|--------|-------------|
-| trading-bot-001 | ✅ APPROVED | [d0280339...](https://testnet.cspr.live/transaction/d0280339ef34ba5d339c72479d95f33daae0bcd9a6b2bd12823abeeea9f45da8) |
-| defi-agent-007 | 🔴 BLOCKED | [54783ee7...](https://testnet.cspr.live/transaction/54783ee766cee754bd3376f43bd12820bb4ff440cd74500a0be0509e5ff555c9) |
-| rwa-oracle-003 | ✅ APPROVED | [4e43c334...](https://testnet.cspr.live/transaction/4e43c334f60fb801317dde3c003a3daa9aaa64007603ab9754a230276b254ed8) |
-
-Wallet: 02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada
-Balance: 2713.5995 CSPR
-
-## Real On-Chain Transactions — Casper Testnet
-
-| Agent | Result | Deploy Hash |
-|-------|--------|-------------|
-| trading-bot-001 | ✅ APPROVED | [d0280339...](https://testnet.cspr.live/transaction/d0280339ef34ba5d339c72479d95f33daae0bcd9a6b2bd12823abeeea9f45da8) |
-| defi-agent-007 | 🔴 BLOCKED | [54783ee7...](https://testnet.cspr.live/transaction/54783ee766cee754bd3376f43bd12820bb4ff440cd74500a0be0509e5ff555c9) |
-| rwa-oracle-003 | ✅ APPROVED | [4e43c334...](https://testnet.cspr.live/transaction/4e43c334f60fb801317dde3c003a3daa9aaa64007603ab9754a230276b254ed8) |
-
-Wallet: 02038ccdd95411a19ba15d4784545a3e07dfa3afd2a839253472232991541ff55ada
-Balance: 2713.5995 CSPR
-
-## ✅ Test Results — AI Risk Scoring Engine
-
-217/217 tests passed (100% pass rate)
-
-- 80 HIGH risk tests ✅
-- 80 LOW risk tests ✅  
-- 50 MEDIUM risk tests ✅
-- 7 boundary tests ✅
-
-🛡️ 217 passed, 0 failed, 217 total
-
-## ⚡ Run Real x402 Payment (Node.js)
-
-```bash
-cd worker
-node x402_real_payment.mjs
-
-## ⚡ Run Real x402 Payment (Node.js JS SDK)
-```bash
-cd worker
-node x402_real_payment.mjs
-```
-Real output: 3 live Casper testnet transactions, 2 approved, 1 blocked.
