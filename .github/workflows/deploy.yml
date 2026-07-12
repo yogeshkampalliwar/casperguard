@@ -46,12 +46,20 @@ jobs:
 
       - name: Deploy to testnet
         run: |
-          casper-client put-deploy \
+          casper-client put-transaction session \
             --node-address https://node.testnet.casper.network/rpc \
             --chain-name casper-test \
             --secret-key secret_key.pem \
-            --payment-amount 100000000000 \
-            --session-path contract/wasm/CasperGuard.wasm
+            --payment-amount 200000000000 \
+            --standard-payment true \
+            --pricing-mode classic \
+            --gas-price-tolerance 1 \
+            --transaction-runtime vm-casper-v1 \
+            --wasm-path contract/wasm/CasperGuard.wasm \
+            --install-upgrade \
+            --session-arg "odra_cfg_package_hash_key_name:string:'casperguard_package_hash'" \
+            --session-arg "odra_cfg_allow_key_override:bool:'true'" \
+            --session-arg "odra_cfg_is_upgradable:bool:'true'"
 
       - name: Cleanup
         if: always()
