@@ -8,7 +8,7 @@ export async function getBlockHeight(): Promise<number> {
       body: JSON.stringify({ jsonrpc: '2.0', method: 'chain_get_block', params: {}, id: 1 })
     })
     const data = await r.json()
-    return data.result.block_with_signatures.block.Version2.header.height
+    return data?.result?.block_with_signatures?.block?.Version2?.header?.height || data?.result?.block_with_signatures?.block?.header?.height || 0
   } catch { return 0 }
 }
 
