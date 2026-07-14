@@ -68,6 +68,22 @@ node worker/mcp_client.mjs
 node tests/casperguard.test.cjs
 ```
 
+### Smart Contract Build + Deploy
+
+```bash
+# Build
+cd contract
+cargo odra build
+
+# Deploy to Casper Testnet
+casper-client put-transaction \
+  --node-address https://node.testnet.casper.network/rpc \
+  --chain-name casper-test \
+  --secret-key keys/secret_key.pem \
+  --payment-amount 50000000000 \
+  --session-path wasm/CasperGuard.wasm
+```
+
 ### Smart Contract (Rust + Odra)
 ```bash
 cd contract
