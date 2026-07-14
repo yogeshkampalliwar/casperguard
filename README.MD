@@ -68,39 +68,6 @@ node worker/mcp_client.mjs
 node tests/casperguard.test.cjs
 ```
 
-### Smart Contract Build + Deploy
-
-```bash
-# Build
-cd contract
-cargo odra build
-
-# Deploy to Casper Testnet
-casper-client put-transaction \
-  --node-address https://node.testnet.casper.network/rpc \
-  --chain-name casper-test \
-  --secret-key keys/secret_key.pem \
-  --payment-amount 50000000000 \
-  --session-path wasm/CasperGuard.wasm
-```
-
-### Smart Contract (Rust + Odra)
-```bash
-cd contract
-cargo odra build
-```
-
-> ⚠️ Python removed — all agents now in Node.js for consistency and performance
-
-### x402 Payment Agent
-```bash
-node worker/x402_real_payment.mjs
-```
-
-### Local Tunnel (Public URL)
-```bash
-npx localtunnel --port 5173
-```
 
 ### Termux Android
 ```bash
@@ -131,13 +98,7 @@ node worker/x402_real_payment.mjs
 npx localtunnel --port 5173
 ```
 
-### Termux Android
-```bash
-pkg update && pkg install nodejs git
-git clone https://github.com/yogeshkampalliwar/casperguard
-cd casperguard && npm install
-node server.cjs & npm run dev -- --host
-```
+
 
 ### Smart Contract Build
 ```bash
