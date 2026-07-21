@@ -120,8 +120,7 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 
 ### Step 4: Deploy to Casper Testnet
 
-Update KEY_PATH in deploy.mjs with your key path, then:
-
+    # Copy your secret_key.pem to contract/keys/ then:
     node deploy.mjs
 
 ### Step 5: Verify
