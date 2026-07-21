@@ -9,7 +9,7 @@ const {
 
 const RPC_URL = "https://node.testnet.casper.network/rpc";
 const CHAIN_NAME = "casper-test";
-const KEY_PATH = resolve("/home/codespace/casperguard_old_wallet/secret_key.pem");
+const KEY_PATH = resolve("contract/keys/secret_key.pem");
 const WASM_PATH = resolve("contract/wasm/CasperGuard_opt.wasm");
 
 async function main() {
