@@ -178,3 +178,15 @@ const args = Args.fromMap({
   odra_cfg_is_upgrade: CLValue.newCLValueBool(false),
 })
 SCRIPT
+
+## Deploy via casper-client (Recommended)
+
+```bash
+casper-client put-deploy \
+  --node-address https://node.testnet.casper.network \
+  --chain-name casper-test \
+  --secret-key contract/keys/secret_key.pem \
+  --payment-amount 30000000000 \
+  --session-path contract/wasm/CasperGuard.wasm
+Deploy Hash: 375ed51a2355fc144d55653c36af329295ce94152f23224b24cbb4dd39c710af
+Explorer: https://testnet.cspr.live/deploy/375ed51a2355fc144d55653c36af329295ce94152f23224b24cbb4dd39c710af
