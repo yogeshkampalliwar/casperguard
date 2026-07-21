@@ -151,12 +151,3 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 
 ## 📄 License
 MIT
-
-### Find deploy.mjs
-
-```bash
-# deploy.mjs is in the root of the project
-ls deploy.mjs
-
-# Run it
-node deploy.mjs
