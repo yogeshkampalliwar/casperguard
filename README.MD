@@ -122,3 +122,35 @@ Live: https://casperguard-bay.vercel.app
 📄 License
 MIT
 
+
+## 🚀 Deploy Your Own CasperGuard Contract
+
+### Prerequisites
+```bash
+# Install Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Install Odra
+cargo install cargo-odra
+# Install Casper Client
+cargo install casper-client
+Step 1: Clone & Build
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard/contract
+cargo odra build
+# WASM file: contract/wasm/CasperGuard.wasm
+Step 2: Get Testnet Keys & CSPR
+Create wallet at testnet.cspr.live
+Get free CSPR from faucet: https://testnet.cspr.live/tools/faucet
+Download secret_key.pem from wallet
+Step 3: Deploy to Casper Testnet
+casper-client put-deploy \
+  --node-address https://node.testnet.casper.network \
+  --chain-name casper-test \
+  --secret-key ./secret_key.pem \
+  --payment-amount 30000000000 \
+  --session-path contract/wasm/CasperGuard.wasm
+casper-client get-deploy \
+  --node-address https://node.testnet.casper.network \
+  [DEPLOY_HASH]
+Step 5: View on Explorer
+https://testnet.cspr.live/deploy/[DEPLOY_HASH]
