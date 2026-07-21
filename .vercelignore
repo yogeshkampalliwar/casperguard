@@ -2,7 +2,6 @@ node_modules
 worker
 contract
 tests
-api
 gitpaid
 *.py
 *.pem
