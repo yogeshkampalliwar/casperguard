@@ -1,1 +1,124 @@
-[?2004h[?1049h[22;0;0t[1;29r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J(B[0;7m  GNU nano 7.2             New Buffer                       [1;59H(B[m[27;6H(B[0;7m[ Welcome to nano.  For basic help, type Ctrl+G. ](B[m[28d(B[0;7m^G(B[m Help     (B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut[49G(B[0;7m^T(B[m Execute[29d(B[0;7m^X(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[2d[?12l[?25h[?25l[1;39H(B[0;7m*[59G(B[m[?12l[?25h[2dl[?25l[?12l[?25hs[?25l[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[27d  (B[0;7m[ line 11/12 (91%), col  1/ 1 (100%), char 12/13 (92%) ](B[m[?12l[?25h[12d[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[27d(B[0;7mSave modified buffer?                                       [28;1H Y(B[m Yes[K[29d(B[0;7m N(B[m No           (B[0;7m^C(B[m Cancel[K[27;23H[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[28d(B[0;7m^G(B[m Help[28;16H(B[0;7mM-D(B[m DOS Format (B[0;7mM-A(B[m Append     (B[0;7mM-B(B[m Backup File[29;1H(B[0;7m^C(B[m Cancel[16G(B[0;7mM-M(B[m Mac Format (B[0;7mM-P(B[m Prepend    (B[0;7m^T(B[m Browse[27d(B[0;7mFile Name to Write:  (B[m[?12l[?25h[?25l  [1K (B[0;7m[ Cancelled ](B[m[K[28;13H(B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut      (B[0;7m^T(B[m Execute[K[29;2H(B[0;7mX(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?12l[?25h[19d[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[27d(B[0;7mSave modified buffer?                                       [28;1H Y(B[m Yes[K[29d(B[0;7m N(B[m No           (B[0;7m^C(B[m Cancel[K[27;23H[?12l[?25h[?25l[?12l[?25h[?25l[1K (B[0;7m[ Cancelled ](B[m[K[28d(B[0;7m^G(B[m Help     (B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut[49G(B[0;7m^T(B[m Execute[29d(B[0;7m^X(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?12l[?25h[21d[?25l[22d[?12l[?25h[?25l[27d  (B[0;7m[ line 21/22 (95%), col  1/ 1 (100%), char 22/23 (95%) ](B[m[?12l[?25h[22d[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[29;1H[?1049l[23;0;0t[?1l>[?1049h[22;0;0t[1;59r[?12l[?25h[39;49m]104(B[m[4l[?7h[H[2J[?2004h[?1h=[?1h=(B[0;7m  GNU nano 7.2             New Buffer *                     [1;59H(B[m[2dls[58d(B[0;7m^G(B[m Help     (B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut[49G(B[0;7m^T(B[m Execute[59d(B[0;7m^X(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?25l[?12l[?25h[24d[?25l[?12l[?25h[59;1H[?1049l[23;0;0t[?1l>[?1049h[22;0;0t[1;29r[?12l[?25h[39;49m]104(B[m[4l[?7h[H[2J(B[0;7m  GNU nano 7.2             New Buffer *                     [2;1H(B[mls[H[?2004h[?1h=[?1h=[59G[28d(B[0;7m^G(B[m Help     (B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut[49G(B[0;7m^T(B[m Execute[29d(B[0;7m^X(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?25l[?12l[?25h[24d[?25l[?12l[?25h[?25l[?12l[?25hl[?25l[?12l[?25hs[?25l[25d[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[Als[?25l[?12l[?25hq[?25l[27d(B[0;7mSave modified buffer?                                       [28;1H Y(B[m Yes[K[29d(B[0;7m N(B[m No           (B[0;7m^C(B[m Cancel[K[27;23H[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[1K (B[0;7m[ Cancelled ](B[m[K[28d(B[0;7m^G(B[m Help     (B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut[49G(B[0;7m^T(B[m Execute[29d(B[0;7m^X(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?12l[?25h[24;4H[?25l[28;13H        (B[0;7mM-F(B[m New Buffer      (B[0;7m^X(B[m Execute Command[29;2H(B[0;7mC(B[m Cancel           (B[0;7mM-N(B[m No Conversion   (B[0;7m^T(B[m Browse[K[27d(B[0;7mFile to insert [from ./]:                                   [27;27H(B[m[?12l[?25h[?25l[1K (B[0;7m[ Cancelled ](B[m[K[28;13H(B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut      (B[0;7m^T(B[m Execute[29;2H(B[0;7mX(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?12l[?25h[24;4H[?25l[27d(B[0;7m[ line 23/24 (95%), col  4/ 4 (100%), char 27/28 (96%) ](B[m[?12l[?25h[24;4H[?25l[28;13H   (B[0;7mM-D(B[m DOS Format (B[0;7mM-A(B[m Append     (B[0;7mM-B(B[m Backup File[29;2H(B[0;7mC(B[m Cancel      (B[0;7mM-M(B[m Mac Format (B[0;7mM-P(B[m Prepend    (B[0;7m^T(B[m Browse[K[27d(B[0;7mFile Name to Write:                                         [27;21H(B[m[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l(B[0;7mx(B[m[?12l[?25h[?25l(B[0;7mi(B[m[?12l[?25h[?25l(B[0;7mr(B[m[?12l[?25h[?25l[1K (B[0;7m[ Writing... ](B[m[K[1;28H(B[0;7m    xir     [59G(B[m[27;22H(B[0;7m[ Wrote 23 lines ](B[m[28;13H(B[0;7m^O(B[m Write Out(B[0;7m^W(B[m Where Is (B[0;7m^K(B[m Cut      (B[0;7m^T(B[m Execute[K[29;2H(B[0;7mX(B[m Exit     (B[0;7m^R(B[m Read File(B[0;7m^\(B[m Replace  (B[0;7m^U(B[m Paste    (B[0;7m^J(B[m Justify[?12l[?25h[24;4H[?25l[1;36H(B[0;7m*[59G(B[m[?12l[?25h[24;3H 
+ 🛡️ CasperGuard
+
+**AI Agent Security Layer | x402 Micropayments | GitPaid | Casper Network**
+
+> Built for Casper Agentic Buildathon 2026
+
+## 🎬 Demo Videos
+- https://youtube.com/shorts/y_jFBxfJE2I
+- https://youtube.com/shorts/hCfUkW8m-ZU
+- https://youtube.com/shorts/JyOeau-qFvw
+- https://youtube.com/shorts/ic_Zhp3o_XI
+
+## 🌐 Live Demo
+https://casperguard-bay.vercel.app
+
+## 💡 Inspiration
+Every day, AI agents execute thousands of autonomous transactions with zero security. A single compromised agent can drain an entire protocol in seconds. CasperGuard is the first real-time AI security firewall built natively on Casper Network.
+
+## 🤖 What It Does
+- 🛡️ AI Security — APPROVES low-risk, BLOCKS high-risk transactions
+- 🚨 Auto-Pause — Emergency contract stop when threat hits 3/3
+- ⚡ x402 Micropayments — 0.1 CSPR per security scan
+- 🤖 MCP Server — Live blockchain tools for AI agents
+- 💰 GitPaid — ETH bounties for open source contributors
+- 🔗 Casper Wallet — Real connect, real balance, real signing
+
+## 🔧 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19 + TypeScript + Vite |
+| AI Agent | Node.js + Casper RPC v2 |
+| Smart Contract | Rust + Odra Framework |
+| GitPaid | Solidity + Ethers.js v6 (Base Sepolia) |
+| Payments | x402 + EIP-712 |
+
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard
+npm install
+node server.cjs &
+npm run dev -- --host
+# AI Security Agent
+node worker/agent.mjs
+
+# x402 Payment Agent
+node worker/x402_real_payment.mjs
+
+# MCP Server
+node worker/mcp_client.mjs
+
+# Unit Tests (218 passing)
+node tests/casperguard.test.cjs
+
+# Smart Contract Build
+cd contract && cargo odra build
+Agent Transaction Request
+        ↓
+CasperGuard Risk Scorer
+        ↓
+Amount > 100 CSPR? → HIGH RISK → BLOCKED 🔴
+Amount > 10 CSPR?  → MEDIUM RISK → WARNING 🟡
+Amount <= 10 CSPR? → LOW RISK → APPROVED ✅
+        ↓
+Auto-Pause if threats >= threshold 🚨
+📜 On-Chain Proof
+What
+Hash
+Contract
+hash-28611fbed24f95c3f69607a85eaed782a80b36da588169bdeab8cbab92dbedb0
+Deploy TX
+3bb468313efb823a81d3350ab8f2024687c1d9218a4a41d86d8f3429e7af5bfb
+GitPaid
+0x6E7454907D72bd5eff1e93b4f37CD57Dc527D809 (Base Sepolia)
+🔗 View Contract
+⚡ Real x402 Transactions
+Agent
+Amount
+Status
+TX
+trading-bot-001
+5 CSPR
+✅ APPROVED
+d0280339...
+defi-agent-007
+150 CSPR
+🔴 BLOCKED
+54783ee7...
+rwa-oracle-003
+2 CSPR
+✅ APPROVED
+4e43c334...
+🧪 Testing
+node tests/casperguard.test.cjs
+# ✅ 218 passed | ❌ 0 failed
+🚀 Challenges Solved
+CORS Block — Built Vercel serverless /api/block proxy
+x402 No JS SDK — Built custom EIP-712 client
+Auto-Pause Design — Threshold-based emergency stop
+🗺️ Roadmap
+Month
+Milestone
+1
+✅ Testnet deployed + x402 payments live
+2
+ML-based risk engine
+3
+Mainnet + Halborn audit
+4
+x402 SDK release
+5
+CasperGuard DAO
+6
+1000+ agents monitored daily
+👤 Builder
+Yogesh Kampalliwar — Solo Builder
+GitHub: https://github.com/yogeshkampalliwar
+Twitter: https://twitter.com/yogeshr50283421
+Live: https://casperguard-bay.vercel.app
+📄 License
+MIT
+
