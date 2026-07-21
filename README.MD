@@ -53,7 +53,7 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
     # MCP Server
     node worker/mcp_client.mjs
 
-    # Unit Tests (218 passing)
+    # Unit Tests (10000 passing)
     node tests/casperguard.test.cjs
 
     # Smart Contract Build
@@ -92,7 +92,7 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 ## 🧪 Testing
 
     node tests/casperguard.test.cjs
-    # ✅ 218 passed | ❌ 0 failed
+    # ✅ 10000 passed | ❌ 0 failed
 
 ## 🚀 Challenges Solved
 1. CORS Block — Built Vercel serverless /api/block proxy
