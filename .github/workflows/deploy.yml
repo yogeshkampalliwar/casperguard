@@ -9,58 +9,67 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Rust
-        uses: actions-rs/toolchain@v1
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          toolchain: stable
-          override: true
+          node-version: '20'
 
-      - name: Install wasm target, casper-client and cargo-odra
+      - name: Setup Rust + Odra
         run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
           rustup target add wasm32-unknown-unknown
-          cargo install casper-client
           cargo install cargo-odra
-
-      - name: Install wasm32 target for pinned nightly toolchain
-        run: |
-          cd contract
-          TOOLCHAIN=$(cat rust-toolchain 2>/dev/null | tr -d ' \n' || echo nightly)
-          echo "Using toolchain: $TOOLCHAIN"
-          rustup toolchain install "$TOOLCHAIN"
-          rustup target add wasm32-unknown-unknown --toolchain "$TOOLCHAIN"
-
-      - name: Install wasm-opt (binaryen) - latest release
-        run: |
           curl -L https://github.com/WebAssembly/binaryen/releases/download/version_119/binaryen-version_119-x86_64-linux.tar.gz -o binaryen.tar.gz
           tar -xzf binaryen.tar.gz
           sudo cp binaryen-version_119/bin/wasm-opt /usr/local/bin/
-          wasm-opt --version
 
-      - name: Write secret key
-        run: echo "${{ secrets.CASPER_SECRET_KEY }}" > secret_key.pem
+      - name: Install wasm32 for pinned toolchain
+        run: |
+          cd contract
+          TOOLCHAIN=$(cat rust-toolchain 2>/dev/null | tr -d ' \n' || echo nightly)
+          rustup toolchain install "$TOOLCHAIN"
+          rustup target add wasm32-unknown-unknown --toolchain "$TOOLCHAIN"
 
-      - name: Build contract
+      - name: Build contract WASM
         run: |
           cd contract
           cargo odra build
 
-      - name: Deploy to testnet
-        run: |
-          casper-client put-transaction session \
-            --node-address https://node.testnet.casper.network/rpc \
-            --chain-name casper-test \
-            --secret-key secret_key.pem \
-            --payment-amount 200000000000 \
-            --standard-payment true \
-            --pricing-mode classic \
-            --gas-price-tolerance 1 \
-            --transaction-runtime vm-casper-v1 \
-            --wasm-path contract/wasm/CasperGuard.wasm \
-            --install-upgrade \
-            --session-arg "odra_cfg_package_hash_key_name:string:'casperguard_package_hash'" \
-            --session-arg "odra_cfg_allow_key_override:bool:'true'" \
-            --session-arg "odra_cfg_is_upgradable:bool:'true'"
+      - name: Install casper-js-sdk
+        run: npm install casper-js-sdk
 
-      - name: Cleanup
-        if: always()
-        run: rm -f secret_key.pem
+      - name: Write secret key
+        run: echo "${{ secrets.CASPER_SECRET_KEY }}" > /tmp/secret_key.pem
+
+      - name: Deploy to Casper Testnet
+        run: |
+          cat > deploy_ci.mjs << 'SCRIPT'
+          import { readFile } from "node:fs/promises"
+          import CasperSdk from "casper-js-sdk"
+          const { Args, CLValue, HttpHandler, KeyAlgorithm, PrivateKey, RpcClient, SessionBuilder } = CasperSdk
+          const handler = new HttpHandler("https://node.testnet.casper.network/rpc")
+          const rpc = new RpcClient(handler)
+          const pem = await readFile("/tmp/secret_key.pem", "utf8")
+          const privKey = await PrivateKey.fromPem(pem, KeyAlgorithm.SECP256K1)
+          const wasm = await readFile("contract/wasm/CasperGuard.wasm")
+          const args = Args.fromMap({
+            odra_cfg_package_hash_key_name: CLValue.newCLString("casperguard_package_hash"),
+            odra_cfg_allow_key_override: CLValue.newCLValueBool(true),
+            odra_cfg_is_upgradable: CLValue.newCLValueBool(true),
+            odra_cfg_is_upgrade: CLValue.newCLValueBool(false),
+          })
+          const tx = new SessionBuilder()
+            .from(privKey.publicKey)
+            .wasm(wasm)
+            .installOrUpgrade()
+            .runtimeArgs(args)
+            .chainName("casper-test")
+            .payment(400000000000)
+            .build()
+          tx.sign(privKey)
+          const result = await rpc.putTransaction(tx)
+          console.log("Hash:", JSON.stringify(result.transactionHash))
+          console.log("Explorer: https://testnet.cspr.live/transaction/" + result.transactionHash?.Version1)
+          SCRIPT
+          node deploy_ci.mjs
