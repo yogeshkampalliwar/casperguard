@@ -123,7 +123,7 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
     casper-client put-deploy \
       --node-address https://node.testnet.casper.network \
       --chain-name casper-test \
-      --secret-key ./secret_key.pem \
+      --secret-key /workspaces/casperguard/contract/keys/secret_key.pem \
       --payment-amount 30000000000 \
       --session-path /workspaces/casperguard/contract/wasm/CasperGuard.wasm
 
