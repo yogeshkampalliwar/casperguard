@@ -38,15 +38,16 @@ async function main() {
   const installTx = new SessionBuilder()
     .from(publicKey)
     .wasm(wasm)
-    .installOrUpgrade()
+    .wasm(wasm)
     .runtimeArgs(installArgs)
     .chainName(CHAIN_NAME)
     .payment(200000000000)
-    .buildFor1_5();
+    .build();
   installTx.sign(privateKey);
 
-  const installSubmit = await rpcClient.putDeploy(installTx);
-  const installHash = installSubmit?.deployHash?.toHex?.() || String(installSubmit);
+  const installSubmit = await rpcClient.putTransaction(installTx);
+  console.log("RAW:", JSON.stringify(installSubmit));
+  const installHash = installSubmit?.rawJSON?.transaction_hash?.Version1 || installSubmit?.transactionHash?.Version1 || "";
   console.log("Install hash:", installHash);
   console.log("URL: https://testnet.cspr.live/transaction/" + installHash);
 
@@ -76,10 +77,10 @@ async function main() {
     .runtimeArgs(Args.fromMap({}))
     .chainName(CHAIN_NAME)
     .payment(1000000000)
-    .buildFor1_5();
+    .build();
   initTx.sign(privateKey);
 
-  const initSubmit = await rpcClient.putDeploy(initTx);
+  const initSubmit = await rpcClient.putTransaction(initTx);
   const initHash = initSubmit?.deployHash?.toHex?.() || String(initSubmit);
   console.log("Init hash:", initHash);
   console.log("URL: https://testnet.cspr.live/transaction/" + initHash);
