@@ -120,12 +120,9 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 
 ### Step 4: Deploy to Casper Testnet
 
-    casper-client put-deploy \
-      --node-address https://node.testnet.casper.network \
-      --chain-name casper-test \
-      --secret-key ./contract/keys/secret_key.pem \
-      --payment-amount 30000000000 \
-      --session-path ./contract/wasm/CasperGuard.wasm
+Update KEY_PATH in deploy.mjs with your key path, then:
+
+    node deploy.mjs
 
 ### Step 5: Verify
 
