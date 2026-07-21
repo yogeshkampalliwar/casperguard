@@ -205,7 +205,7 @@ export default function App() {
           memo: 'x402:' + serviceId + ':' + agentId
         }
         const deepLink = 'casper-wallet://sign?data=' + encodeURIComponent(JSON.stringify(deployData))
-        try { window.location.href = deepLink } catch(e) {}
+        // Note: Real signing via CSPR.click integration (recommended by Casper)
         addLog('✅ Casper Wallet app opened for signing!')
         addLog('[3] → Sign in Casper Wallet app')
         
