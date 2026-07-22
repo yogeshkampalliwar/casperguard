@@ -151,3 +151,27 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 
 ## 📄 License
 MIT
+
+## ✅ Latest Contract Deploy (Jul 22, 2026)
+
+| Item | Value |
+|------|-------|
+| Contract Hash | hash-b245d0122d333e99d924bf6343dbd72d69508ed42df934cbca043777432402f1 |
+| TX Hash | 086ba97433c279cecfc4c90ff1345930f272f0617bdb51af86fd1a4d2086f133 |
+| Status | ✅ Success |
+| Explorer | [View TX](https://testnet.cspr.live/transaction/086ba97433c279cecfc4c90ff1345930f272f0617bdb51af86fd1a4d2086f133) |
+
+## 🚀 Deploy Commands
+
+```bash
+# Update Cargo.toml to Odra 2.9
+sed -i 's/odra = { version = "2.8"/odra = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-casper-livenet-env = { version = "2.8"/odra-casper-livenet-env = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-test = { version = "2.8"/odra-test = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-build = { version = "2.8"/odra-build = { version = "2.9"/' Cargo.toml
+
+# Build WASM
+cargo odra build
+
+# Deploy to Casper Testnet
+cargo run --bin deploy_on_livenet --features livenet
