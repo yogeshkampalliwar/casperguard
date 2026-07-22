@@ -58,6 +58,7 @@ git clone https://github.com/yogeshkampalliwar/casperguard
 cd casperguard
 npm install
 npm run dev
+
 🤖 Agent Commands
 # AI Security Agent
 node worker/agent.mjs
@@ -77,6 +78,7 @@ cd contract && cargo odra build
 
 # Deploy Contract
 node deploy.mjs
+
 🤖 How It Works
 Agent Transaction Request
         ↓
@@ -87,6 +89,7 @@ Amount > 10 CSPR?  → MEDIUM RISK → WARNING 🟡
 Amount <= 10 CSPR? → LOW RISK   → APPROVED ✅
         ↓
 Auto-Pause if threats >= 3/3 🚨
+
 📜 On-Chain Proof (Casper Testnet)
 What
 Hash
@@ -115,13 +118,16 @@ rwa-oracle-003
 ✅ APPROVED
 4e43c334...
 🧪 Testing
+
 node tests/casperguard.test.cjs
 # ✅ 10000 passed | ❌ 0 failed
+
 🚀 Challenges Solved
 CORS Block — Built Vercel serverless /api/block proxy
 x402 No JS SDK — Built custom EIP-712 client from scratch
 Auto-Pause Design — Threshold-based emergency stop on-chain
 pycspr API mismatch — Switched to casper-js-sdk v5 for real transactions
+
 🗺️ Roadmap
 Month
 Milestone
@@ -137,10 +143,12 @@ x402 SDK release
 CasperGuard DAO
 6
 1000+ agents/day
+
 👤 Builder
 Yogesh Kampalliwar — Solo Builder
 GitHub: https://github.com/yogeshkampalliwar
 Twitter: https://twitter.com/yogeshr50283421
 Live: https://casperguard-bay.vercel.app
+
 📄 License
 MIT
