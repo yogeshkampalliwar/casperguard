@@ -17,7 +17,7 @@ https://casperguard-bay.vercel.app
 
 ## 💡 What is CasperGuard?
 
-The first real-time AI security firewall on Casper Network. Every AI agent transaction is scored and either approved or blocked. Agents pay 0.1 CSPR per scan via x402 micropayments — creating a self-sustaining security layer.
+The first real-time AI security firewall on Casper Network. Every AI agent transaction is scored and either approved or blocked. Agents pay 0.1 CSPR per scan via x402 micropayments.
 
 ---
 
@@ -25,7 +25,7 @@ The first real-time AI security firewall on Casper Network. Every AI agent trans
 
 - 🛡️ AI Security — APPROVES low-risk, BLOCKS high-risk transactions
 - 🚨 Auto-Pause — Contract stops when threat level hits critical
-- ⚡ x402 Micropayments — 0.1 CSPR per security scan
+- ⚡ x402 Micropayments — Real Casper testnet transactions per scan
 - 🤖 MCP Server — Live blockchain tools for AI agents
 - 💰 GitPaid — ETH bounties for GitHub contributors (Base Sepolia)
 - 🔗 Casper Wallet — Real connect, real balance, real signing
@@ -45,8 +45,11 @@ The first real-time AI security firewall on Casper Network. Every AI agent trans
 
 ---
 
-## 📖 Setup Guide
-See [SETUP.md](SETUP.md) for detailed wallet creation, faucet, and deploy instructions.
+## 📖 Full Setup Guide
+
+See [SETUP.md](SETUP.md) for wallet creation, faucet, and deploy instructions.
+
+---
 
 ## 🚀 Quick Start
 
@@ -59,30 +62,31 @@ npm run dev
 # AI Security Agent
 node worker/agent.mjs
 
-# x402 Real Payment Agent
+# x402 Real Payment Agent (Real Casper transactions)
 node worker/x402_real_payment.mjs
 
-# MCP Agent
-node worker/mcp_client.mjs
+# MCP Server
+python3 worker/mcp_server.py
 
-# Unit Tests (218 passing)
+# Unit Tests
 node tests/casperguard.test.cjs
+# 10000 passed, 0 failed
 
 # Smart Contract Build
 cd contract && cargo odra build
 
-# Deploy to Casper Testnet
-cd contract && cargo run --bin deploy_on_livenet --features=livenet
+# Deploy Contract
+node deploy.mjs
 🤖 How It Works
 Agent Transaction Request
         ↓
 CasperGuard Risk Scorer
         ↓
-Amount > 100 CSPR? → HIGH RISK → BLOCKED 🔴
+Amount > 100 CSPR? → HIGH RISK  → BLOCKED 🔴
 Amount > 10 CSPR?  → MEDIUM RISK → WARNING 🟡
-Amount <= 10 CSPR? → LOW RISK → APPROVED ✅
+Amount <= 10 CSPR? → LOW RISK   → APPROVED ✅
         ↓
-Auto-Pause if threats >= threshold 🚨
+Auto-Pause if threats >= 3/3 🚨
 📜 On-Chain Proof (Casper Testnet)
 What
 Hash
@@ -101,22 +105,23 @@ TX
 trading-bot-001
 5 CSPR
 ✅ APPROVED
-d028033...
+d0280339...
 defi-agent-007
 150 CSPR
 🔴 BLOCKED
-54783ee...
+54783ee7...
 rwa-oracle-003
 2 CSPR
 ✅ APPROVED
-4e43c33...
-Testing — 10000  Unit Tests
+4e43c334...
+🧪 Testing
 node tests/casperguard.test.cjs
 # ✅ 10000 passed | ❌ 0 failed
 🚀 Challenges Solved
 CORS Block — Built Vercel serverless /api/block proxy
 x402 No JS SDK — Built custom EIP-712 client from scratch
 Auto-Pause Design — Threshold-based emergency stop on-chain
+pycspr API mismatch — Switched to casper-js-sdk v5 for real transactions
 🗺️ Roadmap
 Month
 Milestone
@@ -131,7 +136,7 @@ x402 SDK release
 5
 CasperGuard DAO
 6
-1000+ agents/day, $50K TVL
+1000+ agents/day
 👤 Builder
 Yogesh Kampalliwar — Solo Builder
 GitHub: https://github.com/yogeshkampalliwar
