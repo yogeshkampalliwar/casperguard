@@ -45,6 +45,9 @@ The first real-time AI security firewall on Casper Network. Every AI agent trans
 
 ---
 
+## 📖 Setup Guide
+See [SETUP.md](SETUP.md) for detailed wallet creation, faucet, and deploy instructions.
+
 ## 🚀 Quick Start
 
 ```bash
