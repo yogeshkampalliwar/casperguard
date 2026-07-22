@@ -67,21 +67,25 @@ The first real-time AI security firewall on Casper Network. Every AI agent trans
 git clone https://github.com/yogeshkampalliwar/casperguard
 cd casperguard
 npm install
-Step 4: Add Your Wallet Key
+
+##Step 4: Add Your Wallet Key
 cp /path/to/your/secret_key.pem contract/keys/secret_key.pem
-Step 5: Build Smart Contract
+
+###Step 5: Build Smart Contract
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
-# Install Odra
+### Install Odra
 cargo install cargo-odra
 
-# Build WASM
+
+### Build WASM
 cd contract && cargo odra build
 cd ..
 
-Step 6: Deploy Contract to Casper Testnet
+###Step 6: Deploy Contract to Casper Testnet
+
 node deploy.mjs
 What deploy.mjs does:
 Uses casper-js-sdk v5 with SessionBuilder + putTransaction (Casper 2.0 API)
@@ -92,7 +96,9 @@ Returns TX hash + Explorer link
 Our Deploy TX:
 b3aa90e60c2939a1694d832e93b05263ef2e586348a7c2fcd6c9886dab588cac
 https://testnet.cspr.live/transaction/b3aa90e60c2939a1694d832e93b05263ef2e586348a7c2fcd6c9886dab588cac
-Step 7: Run Frontend
+
+
+###Step 7: Run Frontend
 node server.cjs &
 npm run dev -- --host
 Open http://localhost:5173
@@ -100,7 +106,11 @@ Step 8: Connect Casper Wallet
 Open app in Casper Wallet browser (Play Store)
 Click "Connect Casper Wallet"
 Click "PAY & SCAN" — real 0.1 CSPR transaction
-cat > /workspaces/casperguard/README.MD << 'ENDOFFILE'
+
+
+
+
+
 # 🛡️ CasperGuard
 
 **AI Agent Security Layer | x402 Micropayments | GitPaid | Casper Network**
@@ -109,10 +119,13 @@ cat > /workspaces/casperguard/README.MD << 'ENDOFFILE'
 
 ---
 
-## 🌐 Live Demo
+### 🌐 Live Demo
+
 https://casperguard-bay.vercel.app
 
-## 🎬 Demo Videos
+
+### 🎬 Demo Videos
+
 - https://youtube.com/shorts/y_jFBxfJE2I
 - https://youtube.com/shorts/hCfUkW8m-ZU
 - https://youtube.com/shorts/JyOeau-qFvw
@@ -120,13 +133,14 @@ https://casperguard-bay.vercel.app
 
 ---
 
-## 💡 What is CasperGuard?
+### 💡 What is CasperGuard?
 
 The first real-time AI security firewall on Casper Network. Every AI agent transaction is scored and either approved or blocked before execution. Agents pay 0.1 CSPR per scan via x402 micropayments — creating a self-sustaining security layer.
 
 ---
 
-## 🤖 Features
+### 🤖 Features
+
 
 - 🛡️ **AI Security** — APPROVES low-risk, BLOCKS high-risk transactions in real time
 - 🚨 **Auto-Pause** — Contract automatically stops when threat level hits 3/3
@@ -170,14 +184,20 @@ The first real-time AI security firewall on Casper Network. Every AI agent trans
 git clone https://github.com/yogeshkampalliwar/casperguard
 cd casperguard
 npm install
-Step 4: Add Your Wallet Key
+
+####Step 4: Add Your Wallet Key
+
 cp /path/to/your/secret_key.pem contract/keys/secret_key.pem
 Step 5: Build Smart Contract
-# Install Rust
+
+
+### Install Rust
+
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
-# Install Odra
+
+### Install Odra
 cargo install cargo-odra
 
 # Build WASM
