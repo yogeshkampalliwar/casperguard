@@ -119,10 +119,19 @@ Every day, AI agents execute thousands of autonomous transactions with zero secu
 3. Download secret_key.pem from wallet
 
 ### Step 4: Deploy to Casper Testnet
+## 
+## cd contract 
+    # Update Cargo.toml to Odra 2.9
+sed -i 's/odra = { version = "2.8"/odra = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-casper-livenet-env = { version = "2.8"/odra-casper-livenet-env = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-test = { version = "2.8"/odra-test = { version = "2.9"/' Cargo.toml
+sed -i 's/odra-build = { version = "2.8"/odra-build = { version = "2.9"/' Cargo.toml
 
-    # Copy your secret_key.pem to contract/keys/ then:
-    node deploy.mjs
+# Build WASM
+cargo odra build
 
+# Deploy to Casper Testnet
+cargo run --bin deploy_on_livenet --features livenet
 ### Step 5: Verify
 
     casper-client get-deploy \
