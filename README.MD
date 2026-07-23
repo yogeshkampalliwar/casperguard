@@ -325,3 +325,32 @@ https://casperguard-bay.vercel.app
 # 📄 License
 
 MIT License
+
+## 📱 Fresh Termux Setup — Deploy CasperGuard
+
+### Step 1: Install packages
+pkg update && pkg install git nodejs python rust clang make
+### Step 2: Install Rust via rustup
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+### Step 3: Add WASM target
+rustup target add wasm32-unknown-unknown
+### Step 4: Install Odra CLI
+cargo install cargo-odra
+### Step 5: Clone repo
+git clone https://github.com/yogeshkampalliwar/casperguard
+cd casperguard/contract
+### Step 6: Update Odra to 2.9
+sed -i 's/version = "2.8"/version = "2.9"/g' Cargo.toml
+cargo update
+### Step 7: Setup .env
+cat > .env << EOF
+ODRA_CASPER_LIVENET_SECRET_KEY_PATH=./keys/secret_key.pem
+ODRA_CASPER_LIVENET_NODE_ADDRESS=https://node.testnet.casper.network/rpc
+ODRA_CASPER_LIVENET_CHAIN_NAME=casper-test
+ODRA_CASPER_LIVENET_EVENTS_URL=https://node.testnet.casper.network/events
+EOF
+### Step 8: Build WASM
+cargo odra build
+### Step 9: Deploy
+cargo run --bin deploy_on_livenet --features livenet
