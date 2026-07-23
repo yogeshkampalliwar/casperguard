@@ -96,7 +96,7 @@ Request free Testnet CSPR.
 
 ```bash
 mkdir -p contract/keys
-cp /path/to/secret_key.pem contract/keys/secret_key.pem
+cp /sdcard/Download/Account_secret_key.pem contract/keys/secret_key.pem
 ```
 
 ---
@@ -104,6 +104,10 @@ cp /path/to/secret_key.pem contract/keys/secret_key.pem
 ## Step 5 — Install Rust
 
 ```bash
+# Termux (Android)
+pkg install rust -y
+
+# Or standard Linux/Mac
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 source $HOME/.cargo/env
